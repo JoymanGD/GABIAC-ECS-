@@ -21,3 +21,4 @@ C:\Users\UserName\Desktop\Toil\obj\Debug\netcoreapp3.1\Toil.csproj.CopyComplete
 C:\Users\UserName\Desktop\Toil\obj\Debug\netcoreapp3.1\Toil.dll
 C:\Users\UserName\Desktop\Toil\obj\Debug\netcoreapp3.1\Toil.pdb
 C:\Users\UserName\Desktop\Toil\obj\Debug\netcoreapp3.1\Toil.genruntimeconfig.cache
+C:\Users\UserName\Desktop\Toil\bin\Debug\netcoreapp3.1\Content\Car.xnb

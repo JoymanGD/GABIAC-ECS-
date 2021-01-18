@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Toil.Scripts{
     public class Sprite
@@ -10,14 +11,24 @@ namespace Toil.Scripts{
         public Effect shader {get;private set;}
         public int order {get;private set;}
 
+        private Vector2 offset;
+        private Vector2 lastPos;
+        private Vector2 direction;
+        private Vector2 lastDir;
+
         public Sprite(Texture2D Image, Rectangle Rect, int Order = 1, Effect Shader = null)
         {
+            image = Image;
             rectangle = Rect;
             SetShader(Shader);
+            offset = new Vector2(Rect.Width/2, Rect.Height/2);
+
+            lastPos = rectangle.Location.ToVector2();
+            // lastDir = Vector2.Zero;
         }
 
         public void Draw(SpriteBatch spriteBatch){
-            spriteBatch.Draw(image, rectangle, null, Color.White, rotation, Vector2.Zero, SpriteEffects.None, (float)order);
+            spriteBatch.Draw(image, rectangle, null, Color.White, rotation, offset, SpriteEffects.None, (float)order);
             
             if(shader != null){
                 foreach (var pass in shader.CurrentTechnique.Passes)
@@ -25,6 +36,15 @@ namespace Toil.Scripts{
                     pass.Apply();
                 }
             }
+        }
+
+        public void Update() {
+            direction = rectangle.Location.ToVector2() - lastPos;
+            direction.Normalize();
+            lastPos = rectangle.Location.ToVector2();
+            rotation = (float)Math.Atan2(direction.Y, direction.X);
+            // rotation = (direction - lastDir).Length();
+            // lastDir = direction;
         }
 
         public void SetShader(Effect Shader){
@@ -44,7 +64,9 @@ namespace Toil.Scripts{
         }
 
         public void Translate(Vector2 translation){
-            rectangle.Offset(translation);
+            var rect = rectangle;
+            rect.Location += translation.ToPoint();
+            rectangle = rect;
         }
 
         public void Translate(float x, float y){
