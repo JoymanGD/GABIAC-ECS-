@@ -174,27 +174,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\UserName\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\UserName\\Desktop\\Toil\\Toil.csproj",
+      "projectUniqueName": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\Toil.csproj",
       "projectName": "Toil",
-      "projectPath": "C:\\Users\\UserName\\Desktop\\Toil\\Toil.csproj",
-      "packagesPath": "C:\\Users\\UserName\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\UserName\\Desktop\\Toil\\obj\\",
+      "projectPath": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\Toil.csproj",
+      "packagesPath": "C:\\Users\\v.kruglyakov\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\UserName\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\v.kruglyakov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

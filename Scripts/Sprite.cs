@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Toil.Scripts{
     public class Sprite
@@ -10,10 +9,10 @@ namespace Toil.Scripts{
         public Rectangle rectangle {get;private set;}
         public Effect shader {get;private set;}
         public int order {get;private set;}
-
+        private Vector2 direction;
+        
         private Vector2 offset;
         private Vector2 lastPos;
-        private Vector2 direction;
         private Vector2 lastDir;
 
         public Sprite(Texture2D Image, Rectangle Rect, int Order = 1, Effect Shader = null)
@@ -24,7 +23,7 @@ namespace Toil.Scripts{
             offset = new Vector2(Rect.Width/2, Rect.Height/2);
 
             lastPos = rectangle.Location.ToVector2();
-            // lastDir = Vector2.Zero;
+            lastDir = Vector2.Zero;
         }
 
         public void Draw(SpriteBatch spriteBatch){
@@ -38,13 +37,16 @@ namespace Toil.Scripts{
             }
         }
 
-        public void Update() {
-            direction = rectangle.Location.ToVector2() - lastPos;
-            direction.Normalize();
+        public void SetDirection(Vector2 dir){
+            direction = dir;
+        }
+
+        public Vector2 GetDirection(){
+            var dir = rectangle.Location.ToVector2() - lastPos;
             lastPos = rectangle.Location.ToVector2();
-            rotation = (float)Math.Atan2(direction.Y, direction.X);
-            // rotation = (direction - lastDir).Length();
-            // lastDir = direction;
+            if(dir != Vector2.Zero)
+                lastDir = dir;
+            return dir == Vector2.Zero ? lastDir : dir;
         }
 
         public void SetShader(Effect Shader){
@@ -56,7 +58,7 @@ namespace Toil.Scripts{
         }
 
         public void Rotate(float angle){
-            rotation += angle;
+            rotation = angle;
         }
 
         public void SetOrder(int Order){

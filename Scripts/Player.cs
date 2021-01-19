@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Toil.Scripts
 {
@@ -32,7 +33,13 @@ namespace Toil.Scripts
             if(state.IsKeyDown((Keys)input.Left)){
                 sprite.Translate(new Vector2(-1,0));
             }
-            sprite.Update();
+
+            RotateForward();
+        }
+
+        private void RotateForward(){
+            var dir = sprite.GetDirection();
+            sprite.Rotate((float)Math.Atan2(dir.Y, dir.X));
         }
     }
 }
