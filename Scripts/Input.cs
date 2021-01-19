@@ -6,5 +6,9 @@ namespace Toil.Scripts
         public int Down=83;
         public int Left=65;
         public int Right=68;
+
+        protected virtual void Move(){
+            
+        }
     }
 }

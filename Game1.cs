@@ -28,7 +28,8 @@ namespace Toil
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var sprite = new Sprite(Content.Load<Texture2D>("Car"), new Rectangle(0,0, 200, 200));
+            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), Vector2.One, 0, 170);
+            var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
             var input = new Input();
             player = new Player(sprite, input, "Player1");
             // TODO: use this.Content to load your game content here
