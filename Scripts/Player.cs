@@ -24,20 +24,21 @@ namespace Toil.Scripts
         public void Update(GameTime gameTime){
             KeyboardState state = Keyboard.GetState();
             var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            transform.SetAxis(new Vector2(0, 0));
             if(state.IsKeyDown((Keys)input.Down)){
-                transform.Accelerate(new Vector2(0, 1));
+                transform.SetAxis(new Vector2(transform.Axis.X, 1));
             }
             if(state.IsKeyDown((Keys)input.Up)){
-                transform.Accelerate(new Vector2(0, -1));
+                transform.SetAxis(new Vector2(transform.Axis.X, -1));
             }
             if(state.IsKeyDown((Keys)input.Right)){
-                transform.Accelerate(new Vector2(1, 0));
+                transform.SetAxis(new Vector2(1, transform.Axis.Y));
             }
             if(state.IsKeyDown((Keys)input.Left)){
-                transform.Accelerate(new Vector2(-1, 0));
+                transform.SetAxis(new Vector2(-1, transform.Axis.Y));
             }
 
-            transform.LookForward();
+            transform.Update(gameTime);
         }
     }
 }

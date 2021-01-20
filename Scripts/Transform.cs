@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using System;
 
@@ -5,13 +6,10 @@ namespace Toil.Scripts{
     public class Transform
     {
         public Vector2 position {get; private set;}
-        public Vector2 velocity {get; private set;}
-        public Vector2 acceleration {get; private set;}
         public Vector2 scale {get; private set;}
         public float rotation {get; private set;}
         public float speed {get; private set;}
-
-        private bool isAccelerating;
+        public Vector2 Axis {get; private set;}
         private Vector2 direction;
         private Vector2 lastPos;
         private Vector2 lastDir;
@@ -28,31 +26,10 @@ namespace Toil.Scripts{
 
         public void Update(GameTime gameTime){
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            velocity += acceleration * deltaTime;
-            position += velocity * deltaTime;
-        }
-
-        public void Accelerate(Vector2 translation){
-            if(!isAccelerating)
-                isAccelerating = true;
-
-            acceleration += translation;
-        }
-
-        private void Deaccelerate(float deltaTime){
-            if(!isAccelerating){
-                if(acceleration.X > 0){
-                    acceleration -= new Vector2(deltaTime, 0);
-                }
-                else
-                    acceleration = new Vector2(0, acceleration.Y);
-
-                if(acceleration.Y > 0){
-                    acceleration -= new Vector2(0, deltaTime);
-                }
-                else
-                    acceleration = new Vector2(acceleration.X, 0);
-            }
+            //position = Vector2.Lerp(position, position+Axis, .5f);
+            LookForward();
+            Debug.WriteLine("Axis: " + Axis);
+            Debug.WriteLine("Rotation: " + rotation);
         }
 
         public void Translate(float x, float y){
@@ -61,6 +38,10 @@ namespace Toil.Scripts{
 
         public void SetScale(Vector2 Scale){
             scale += Scale;
+        }
+
+        public void SetAxis(Vector2 newAxis){
+            Axis = newAxis;
         }
 
         public void SetScale(float x, float y){
@@ -84,9 +65,10 @@ namespace Toil.Scripts{
         }
 
         public void LookForward(){
-            var dir = GetDirection();
-            var rot = (float)Math.Atan2(dir.Y, dir.X);
-            Rotate(CurveAngle(rotation, rot, 0.06f));
+            //var dir = GetDirection();
+            var rot = (float)Math.Atan2(Axis.Y, Axis.X);
+            if(Axis != Vector2.Zero)
+                Rotate(CurveAngle(rotation, rot, 0.1f));
         }
 
         //MOVE IT TO LIB
