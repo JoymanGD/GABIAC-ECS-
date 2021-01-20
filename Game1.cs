@@ -28,7 +28,7 @@ namespace Toil
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), Vector2.One, 0, 170);
+            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), Vector2.One, 0, 6);
             var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
             var input = new Input();
             player = new Player(sprite, input, "Player1");

@@ -9,24 +9,20 @@ namespace Toil.Scripts{
         public Vector2 scale {get; private set;}
         public float rotation {get; private set;}
         public float speed {get; private set;}
+        public Vector2 velocity {get; private set;}
         public Vector2 Axis {get; private set;}
-        private Vector2 direction;
-        private Vector2 lastPos;
-        private Vector2 lastDir;
 
         public Transform(Vector2 _position, Vector2 _scale, float _rotation, float _speed = 1){
             position = _position;
             scale = _scale;
             rotation = _rotation;
             speed = _speed;
-
-            lastPos = position;
-            lastDir = Vector2.Zero;
         }
 
         public void Update(GameTime gameTime){
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //position = Vector2.Lerp(position, position+Axis, .5f);
+            velocity = Vector2.Lerp(velocity, GetDirection() * AbsVector(Axis) * speed, .1f);
+            position += velocity;
             LookForward();
             Debug.WriteLine("Axis: " + Axis);
             Debug.WriteLine("Rotation: " + rotation);
@@ -52,20 +48,12 @@ namespace Toil.Scripts{
             rotation = angle;
         }
 
-        public void SetDirection(Vector2 dir){
-            direction = dir;
-        }
-
         public Vector2 GetDirection(){
-            var dir = position - lastPos;
-            lastPos = position;
-            if(dir != Vector2.Zero)
-                lastDir = dir;
-            return dir == Vector2.Zero ? lastDir : dir;
+            return new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
         }
 
         public void LookForward(){
-            //var dir = GetDirection();
+            
             var rot = (float)Math.Atan2(Axis.Y, Axis.X);
             if(Axis != Vector2.Zero)
                 Rotate(CurveAngle(rotation, rot, 0.1f));
@@ -95,6 +83,10 @@ namespace Toil.Scripts{
 
             double sinTheta = Math.Sin(theta);
             return (float)(Math.Sin((1 - step) * theta) / sinTheta) * from + (float)(Math.Sin(step * theta) / sinTheta) * to;
+        }
+
+        private Vector2 AbsVector(Vector2 innerVector){
+            return new Vector2(Math.Abs(innerVector.X), Math.Abs(innerVector.Y));
         }
     }    
 
