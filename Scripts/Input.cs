@@ -1,14 +1,11 @@
 namespace Toil.Scripts
 {
-    public class Input
+    abstract public class Input
     {
-        public int Up=87;
-        public int Down=83;
-        public int Left=65;
-        public int Right=68;
-
-        protected virtual void Move(){
-            
+        public Transform transform{get;private set;}
+        public Input(Transform _transform){
+            transform=_transform;
         }
+        public abstract void Move();
     }
 }

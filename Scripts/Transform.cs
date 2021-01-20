@@ -24,8 +24,6 @@ namespace Toil.Scripts{
             velocity = Vector2.Lerp(velocity, GetDirection() * AbsVector(Axis) * speed, .1f);
             position += velocity;
             LookForward();
-            Debug.WriteLine("Axis: " + Axis);
-            Debug.WriteLine("Rotation: " + rotation);
         }
 
         public void Translate(float x, float y){

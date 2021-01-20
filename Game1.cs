@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Toil.Scripts;
@@ -16,6 +17,7 @@ namespace Toil
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            //_graphics.IsFullScreen = true;
         }
 
         protected override void Initialize()
@@ -30,8 +32,10 @@ namespace Toil
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), Vector2.One, 0, 6);
             var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
-            var input = new Input();
-            player = new Player(sprite, input, "Player1");
+            var mouseInput = new MouseInput(tr);
+            var keyboardInput = new KeyboardInput(tr);
+            var inputs = new List<Input>{keyboardInput, mouseInput};
+            player = new Player(sprite, inputs, "Player1");
             // TODO: use this.Content to load your game content here
         }
 
@@ -49,7 +53,7 @@ namespace Toil
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
             player.sprite.Draw(_spriteBatch);
             _spriteBatch.End();
