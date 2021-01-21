@@ -26,7 +26,7 @@ namespace Toil.Scripts
         public void Update(GameTime gameTime){
             foreach (var input in inputs)
             {
-                input.Move();
+                input.Update(gameTime);
             }
 
             transform.Update(gameTime);
