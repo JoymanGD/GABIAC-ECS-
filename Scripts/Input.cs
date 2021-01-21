@@ -7,7 +7,7 @@ namespace Toil.Scripts
         public bool isActiveFlag {get; protected set;}
         public Input(Transform _transform){
             transform=_transform;
-        } //test
+        }
         public abstract void Move();
 
         public void Update(GameTime gameTime){
