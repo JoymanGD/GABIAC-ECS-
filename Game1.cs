@@ -22,7 +22,12 @@ namespace Toil
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), new Vector2(.3f,.3f), 0, 12);
+            var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
+            var mouseInput = new MouseInput(tr);
+            var keyboardInput = new KeyboardInput(tr);
+            var inputs = new List<Input>{keyboardInput, mouseInput};
+            player = new Player(sprite, inputs, "Player1");
 
             base.Initialize();
         }
@@ -30,12 +35,6 @@ namespace Toil
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), new Vector2(.3f,.3f), 0, 12);
-            var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
-            var mouseInput = new MouseInput(tr);
-            var keyboardInput = new KeyboardInput(tr);
-            var inputs = new List<Input>{keyboardInput, mouseInput};
-            player = new Player(sprite, inputs, "Player1");
             // TODO: use this.Content to load your game content here
         }
 
@@ -53,6 +52,7 @@ namespace Toil
 
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
             player.sprite.Draw(_spriteBatch);
