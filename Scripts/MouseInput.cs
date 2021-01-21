@@ -16,7 +16,11 @@ namespace Toil.Scripts
             if(state.LeftButton == ButtonState.Pressed){
                 var dir = state.Position.ToVector2() - transform.position;
                 dir.Normalize();
-                transform.SetAxis(dir);
+
+                if(state.RightButton == ButtonState.Pressed)
+                    transform.SetAxis(dir * 3f);
+                else
+                    transform.SetAxis(dir);
             }
             else
                 Stop();

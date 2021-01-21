@@ -30,7 +30,7 @@ namespace Toil
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), Vector2.One, 0, 6);
+            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), new Vector2(.3f,.3f), 0, 12);
             var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
             var mouseInput = new MouseInput(tr);
             var keyboardInput = new KeyboardInput(tr);

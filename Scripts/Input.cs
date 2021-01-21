@@ -8,10 +8,13 @@ namespace Toil.Scripts
         public Input(Transform _transform){
             transform=_transform;
         }
-        public abstract void Move();
 
         public void Update(GameTime gameTime){
             SetState();
+            Movement();
+        }
+
+        private void Movement(){
             if(isActive()){
                 if(!isActiveFlag)
                     isActiveFlag = true;
@@ -33,6 +36,8 @@ namespace Toil.Scripts
         protected void Stop(){
             transform.SetAxis(Vector2.Zero);
         }
+
+        public abstract void Move();
 
         public abstract void SetState();
 

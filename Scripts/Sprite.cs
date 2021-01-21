@@ -15,12 +15,12 @@ namespace Toil.Scripts{
             image = Image;
             transform = tr;
             SetShader(Shader);
-            offset = new Vector2(image.Width * transform.scale.X / 2, image.Height * transform.scale.Y / 2);
+            offset = new Vector2(image.Width / 2, image.Height / 2);
         }
 
         public void Draw(SpriteBatch spriteBatch){
             spriteBatch.Draw(image, transform.position, null, Color.White, transform.rotation, offset, transform.scale, SpriteEffects.None, (float)order);
-            
+
             if(shader != null){
                 foreach (var pass in shader.CurrentTechnique.Passes)
                 {

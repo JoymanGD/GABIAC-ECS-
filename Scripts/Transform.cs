@@ -12,6 +12,9 @@ namespace Toil.Scripts{
         public Vector2 velocity {get; private set;}
         public Vector2 Axis {get; private set;}
 
+        private const float angularDrag = 0.07f;
+        private const float drag = 0.02f;
+
         public Transform(Vector2 _position, Vector2 _scale, float _rotation, float _speed = 1){
             position = _position;
             scale = _scale;
@@ -21,7 +24,7 @@ namespace Toil.Scripts{
 
         public void Update(GameTime gameTime){
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            velocity = Vector2.Lerp(velocity, GetDirection() * AbsVector(Axis) * speed, .1f);
+            velocity = Vector2.LerpPrecise(velocity, GetDirection() * AbsVector(Axis) * speed, drag);
             position += velocity;
             LookForward();
         }
@@ -54,7 +57,7 @@ namespace Toil.Scripts{
             
             var rot = (float)Math.Atan2(Axis.Y, Axis.X);
             if(Axis != Vector2.Zero)
-                Rotate(CurveAngle(rotation, rot, 0.1f));
+                Rotate(CurveAngle(rotation, rot, angularDrag));
         }
 
         //MOVE IT TO LIB
