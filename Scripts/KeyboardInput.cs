@@ -10,30 +10,6 @@ namespace Toil.Scripts
 
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            state = Keyboard.GetState();
-            if(state.GetPressedKeyCount() > 0){
-                if(!isActive)
-                    isActive = true;
-
-                if(isStopped)
-                    isStopped = false;
-            }
-            else{
-                if(isActive)
-                    isActive = false;
-                
-                if(!isStopped){
-                    Stop();
-                    isStopped = true;
-                }
-            }
-
-            if(isActive)
-                Move();
-        }
-
         public override void Move()
         {
             Stop();
@@ -50,6 +26,21 @@ namespace Toil.Scripts
             if(state.IsKeyDown(Keys.A)){
                 transform.SetAxis(new Vector2(-1, transform.Axis.Y));
             }
+        }
+
+        public override void SetState()
+        {
+            state = Keyboard.GetState();
+        }
+
+        public override void Additive()
+        {
+            
+        }
+
+        public override bool isActive()
+        {
+            return state.GetPressedKeyCount() > 0;
         }
     }
 }

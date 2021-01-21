@@ -11,33 +11,6 @@ namespace Toil.Scripts
 
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            state = Mouse.GetState();
-            if(state.Position != lastPos || state.LeftButton == ButtonState.Pressed || state.RightButton == ButtonState.Pressed || state.MiddleButton == ButtonState.Pressed){
-                if(!isActive)
-                    isActive = true;
-
-                if(isStopped)
-                    isStopped = false;
-            }
-            else{
-                if(isActive)
-                    isActive = false;
-                
-                if(!isStopped){
-                    Stop();
-                    isStopped = true;
-                }
-            }
-
-            lastPos = state.Position;
-            
-            if(isActive){
-                Move();
-            }
-        }
-
         public override void Move()
         {
             if(state.LeftButton == ButtonState.Pressed){
@@ -47,6 +20,21 @@ namespace Toil.Scripts
             }
             else
                 Stop();
+        }
+
+        public override void SetState()
+        {
+            state = Mouse.GetState();
+        }
+
+        public override void Additive()
+        {
+            lastPos = state.Position;
+        }
+
+        public override bool isActive()
+        {
+            return state.Position != lastPos || state.LeftButton == ButtonState.Pressed || state.RightButton == ButtonState.Pressed || state.MiddleButton == ButtonState.Pressed;
         }
     }
 }
