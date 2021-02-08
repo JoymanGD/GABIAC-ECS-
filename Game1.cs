@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Toil.Scripts;
+using DefaultEcs;
+using DefaultEcs.System;
+using DefaultEcs.Threading;
 
 namespace Toil
 {
@@ -27,6 +30,7 @@ namespace Toil
             var mouseInput = new MouseInput(tr);
             var keyboardInput = new KeyboardInput(tr);
             var inputs = new List<Input>{keyboardInput, mouseInput};
+            
             player = new Player(sprite, inputs, "Player1");
 
             base.Initialize();
