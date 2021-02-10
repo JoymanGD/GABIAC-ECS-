@@ -24,6 +24,10 @@
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DefaultEcs.Analyzer" Version="0.15.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
@@ -33,6 +37,9 @@
     </Reference>
     <Reference Include="VelcroPhysics">
       <HintPath>Libs\VelcroPhysics.MonoGame.dll</HintPath>
+    </Reference>
+    <Reference Include="DefaultEcs.Analyzer">
+      <HintPath>Libs\DefaultEcs.Analyzer.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

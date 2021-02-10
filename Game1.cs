@@ -15,6 +15,10 @@ namespace Toil
         private SpriteBatch _spriteBatch;
         private Player player;
 
+        private World world;
+        private Entity entity;
+        Texture2D texture;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -25,13 +29,17 @@ namespace Toil
 
         protected override void Initialize()
         {
-            var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), new Vector2(.3f,.3f), 0, 12);
-            var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
-            var mouseInput = new MouseInput(tr);
-            var keyboardInput = new KeyboardInput(tr);
-            var inputs = new List<Input>{keyboardInput, mouseInput};
+            world = new World();
+            entity = world.CreateEntity();
             
-            player = new Player(sprite, inputs, "Player1");
+
+            // var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), new Vector2(.3f,.3f), 0, 12);
+            // var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
+            // var mouseInput = new MouseInput(tr);
+            // var keyboardInput = new KeyboardInput(tr);
+            // var inputs = new List<Input>{keyboardInput, mouseInput};
+            
+            // player = new Player(sprite, inputs, "Player1");
 
             base.Initialize();
         }
@@ -40,14 +48,13 @@ namespace Toil
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
+            texture = Texture2D.FromFile(_graphics.GraphicsDevice, "Content/Car.png");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            player.Update(gameTime);
 
             // TODO: Add your update logic here
 
@@ -58,8 +65,9 @@ namespace Toil
         {
 
             GraphicsDevice.Clear(Color.Black);
+
             _spriteBatch.Begin();
-            player.sprite.Draw(_spriteBatch);
+            _spriteBatch.Draw(texture, Vector2.Zero, Color.White);
             _spriteBatch.End();
             // TODO: Add your drawing code here
 
