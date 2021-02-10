@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/Users/v.kruglyakov/Desktop/Projects/Gabiac/Content/Car.png</SourceFile>
-  <SourceTime>2021-02-08T19:17:48.5619507+10:00</SourceTime>
-  <DestFile>c:/Users/v.kruglyakov/Desktop/Projects/Gabiac/Content/bin/DesktopGL/Content/Car.xnb</DestFile>
-  <DestTime>2021-02-10T16:51:25.1291006+10:00</DestTime>
+  <SourceFile>C:/Users/UserName/Desktop/Gabiac/Content/Car.png</SourceFile>
+  <SourceTime>2021-01-29T16:40:09.0308739+10:00</SourceTime>
+  <DestFile>C:/Users/UserName/Desktop/Gabiac/Content/bin/DesktopGL/Content/Car.xnb</DestFile>
+  <DestTime>2021-02-10T23:59:16.8659603+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

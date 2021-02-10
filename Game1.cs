@@ -1,45 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Toil.Scripts;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
+using ECS.Systems;
+using ECS.Components;
 
-namespace Toil
+namespace Gabiac
 {
-    public class Game1 : Game
+    public class Gabiac : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Player player;
-
+        private ISystem<float> drawSystem;
+        private IParallelRunner mainRunner;
         private World world;
-        private Entity entity;
-        Texture2D texture;
 
-        public Game1()
+        public Gabiac()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            //_graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = true;
         }
 
         protected override void Initialize()
         {
-            world = new World();
-            entity = world.CreateEntity();
-            
-
-            // var tr = new Transform(new Vector2(_graphics.GraphicsDevice.Viewport.Width/2, _graphics.GraphicsDevice.Viewport.Height/2), new Vector2(.3f,.3f), 0, 12);
-            // var sprite = new Sprite(Content.Load<Texture2D>("Car"), tr);
-            // var mouseInput = new MouseInput(tr);
-            // var keyboardInput = new KeyboardInput(tr);
-            // var inputs = new List<Input>{keyboardInput, mouseInput};
-            
-            // player = new Player(sprite, inputs, "Player1");
+            SetupGraphics();
+            SetupWorld();
+            SetupPlayer();
 
             base.Initialize();
         }
@@ -47,8 +38,7 @@ namespace Toil
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
-            texture = Texture2D.FromFile(_graphics.GraphicsDevice, "Content/Car.png");
+            drawSystem = new DrawSystem(_spriteBatch, world, mainRunner);
         }
 
         protected override void Update(GameTime gameTime)
@@ -56,22 +46,33 @@ namespace Toil
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.Black);
-
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(texture, Vector2.Zero, Color.White);
-            _spriteBatch.End();
-            // TODO: Add your drawing code here
+            
+            drawSystem.Update((float)gameTime.ElapsedGameTime.TotalMilliseconds);
 
             base.Draw(gameTime);
+        }
+
+        private void SetupGraphics(){
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.ApplyChanges();
+        }
+
+        private void SetupWorld(){
+            mainRunner = new DefaultParallelRunner(Environment.ProcessorCount);
+            world = new World();
+        }
+
+        private void SetupPlayer(){
+            var Player = world.CreateEntity();
+            Player.Set(new Transform{Position=new Vector2(200, 200), Scale=new Vector2(1,1), Rotation=0});
+            Player.Set(new Renderer{Image = Texture2D.FromFile(GraphicsDevice, "Content/Car.png"), Color=Color.White});
         }
     }
 }

@@ -38,8 +38,5 @@
     <Reference Include="VelcroPhysics">
       <HintPath>Libs\VelcroPhysics.MonoGame.dll</HintPath>
     </Reference>
-    <Reference Include="DefaultEcs.Analyzer">
-      <HintPath>Libs\DefaultEcs.Analyzer.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
