@@ -14,6 +14,7 @@ namespace ECS.Systems
         private SpriteBatch spriteBatch;
         private IParallelRunner runner;
         private World world;
+        
         public DrawSystem(SpriteBatch _spriteBatch, World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
             spriteBatch = _spriteBatch;
             runner = _runner;

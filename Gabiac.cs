@@ -7,6 +7,7 @@ using DefaultEcs.System;
 using DefaultEcs.Threading;
 using ECS.Systems;
 using ECS.Components;
+using VelcroPhysics.Dynamics;
 
 namespace Gabiac
 {
@@ -14,9 +15,11 @@ namespace Gabiac
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private ISystem<float> systems;
         private ISystem<float> drawSystem;
         private IParallelRunner mainRunner;
-        private World world;
+        private DefaultEcs.World world;
+        private VelcroPhysics.Dynamics.World physicWorld;
 
         public Gabiac()
         {
@@ -25,7 +28,6 @@ namespace Gabiac
             IsMouseVisible = true;
             _graphics.IsFullScreen = true;
         }
-
         protected override void Initialize()
         {
             SetupGraphics();
@@ -38,6 +40,11 @@ namespace Gabiac
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            systems = new SequentialSystem<float>(
+                new MouseInputSystem(world, mainRunner),
+                new MovementSystem(world, mainRunner),
+                new PhysicsSystem(world, mainRunner, physicWorld)
+            );
             drawSystem = new DrawSystem(_spriteBatch, world, mainRunner);
         }
 
@@ -45,7 +52,8 @@ namespace Gabiac
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
+            systems.Update((float)gameTime.ElapsedGameTime.TotalMilliseconds);
             base.Update(gameTime);
         }
 
@@ -66,13 +74,16 @@ namespace Gabiac
 
         private void SetupWorld(){
             mainRunner = new DefaultParallelRunner(Environment.ProcessorCount);
-            world = new World();
+            world = new DefaultEcs.World();
+            physicWorld = new VelcroPhysics.Dynamics.World(Vector2.Zero);
         }
 
         private void SetupPlayer(){
             var Player = world.CreateEntity();
-            Player.Set(new Transform{Position=new Vector2(200, 200), Scale=new Vector2(1,1), Rotation=0});
-            Player.Set(new Renderer{Image = Texture2D.FromFile(GraphicsDevice, "Content/Car.png"), Color=Color.White});
+            Player.Set(new Transform(new Vector2(200, 200), new Vector2(1,1), 0));
+            Player.Set(new Controller(Vector2.Zero, 1, false));
+            Player.Set(new PhysicBody(physicWorld, new Vector2(200,200), 0, BodyType.Dynamic));
+            Player.Set(new Renderer(Texture2D.FromFile(GraphicsDevice, "Content/Car.png"), Color.White));
         }
     }
 }
