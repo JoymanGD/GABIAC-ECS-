@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using Gabiac.ECS.Components;
+using Gabiac.Scripts.ECS.Components;
 using FontStashSharp;
 using System.IO;
 using Microsoft.Xna.Framework.Input;
 
-namespace Gabiac.ECS.Systems
+namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Transform))]
     [With(typeof(Player))]

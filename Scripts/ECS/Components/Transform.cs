@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace Gabiac.ECS.Components
+namespace Gabiac.Scripts.ECS.Components
 {
     public struct Transform
     {

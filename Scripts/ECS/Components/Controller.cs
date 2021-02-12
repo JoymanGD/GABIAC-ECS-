@@ -3,7 +3,7 @@ using System.Net.Mime;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Gabiac.ECS.Components
+namespace Gabiac.Scripts.ECS.Components
 {
     public struct Controller
     {

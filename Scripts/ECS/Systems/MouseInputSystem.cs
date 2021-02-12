@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using Gabiac.ECS.Components;
+using Gabiac.Scripts.ECS.Components;
 using VelcroPhysics.Utilities;
 
-namespace Gabiac.ECS.Systems
+namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Controller))]
     [With(typeof(PhysicBody))]

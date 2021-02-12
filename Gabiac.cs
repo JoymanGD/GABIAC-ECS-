@@ -11,7 +11,6 @@ namespace Gabiac
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private SceneManager sceneManager;
 
         public Gabiac()
         {
@@ -31,7 +30,7 @@ namespace Gabiac
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            sceneManager = new SceneManager(new GameScene(graphics), spriteBatch, Content);
+            new SceneManager(new GameScene(graphics), spriteBatch, Content);
         }
 
         protected override void Update(GameTime _gameTime)
@@ -39,7 +38,7 @@ namespace Gabiac
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             
-            sceneManager.Update(_gameTime);
+            SceneManager.instance.Update(_gameTime);
 
             base.Update(_gameTime);
         }
@@ -48,7 +47,7 @@ namespace Gabiac
         {
             GraphicsDevice.Clear(Color.Black);
             
-            sceneManager.Draw(_gameTime);
+            SceneManager.instance.Draw(_gameTime);
             
             base.Draw(_gameTime);
         }

@@ -6,12 +6,16 @@ using Gabiac.Scripts.Scenes;
 namespace Gabiac.Scripts.Managers
 {
     public class SceneManager {
-
+        public static SceneManager instance;
         public IScene currentScene { get; private set;}
         private SpriteBatch spriteBatch;
         
         public SceneManager(IScene _firstScene, SpriteBatch _spriteBatch, ContentManager _contentManager){
+            if(instance == null)
+                instance = this;
+
             spriteBatch = _spriteBatch;
+            
             LoadScene(_firstScene, _contentManager);
         }
 

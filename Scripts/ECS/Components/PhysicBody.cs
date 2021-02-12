@@ -3,7 +3,7 @@ using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using VelcroPhysics.Factories;
 
-namespace Gabiac.ECS.Components
+namespace Gabiac.Scripts.ECS.Components
 {
     public struct PhysicBody
     {

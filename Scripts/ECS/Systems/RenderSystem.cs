@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using Gabiac.ECS.Components;
+using Gabiac.Scripts.ECS.Components;
 
-namespace Gabiac.ECS.Systems
+namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Renderer))]
     [With(typeof(Transform))]

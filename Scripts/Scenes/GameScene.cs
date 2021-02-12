@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework.Content;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using Gabiac.ECS.Systems;
-using Gabiac.ECS.Components;
+using Gabiac.Scripts.ECS.Systems;
+using Gabiac.Scripts.ECS.Components;
 using System;
 
 namespace Gabiac.Scripts.Scenes
