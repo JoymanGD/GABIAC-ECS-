@@ -1,13 +1,10 @@
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using ECS.Components;
-using VelcroPhysics.Utilities;
+using Gabiac.ECS.Components;
 using System;
 
-namespace ECS.Systems
+namespace Gabiac.ECS.Systems
 {
     [With(typeof(Transform))]
     [With(typeof(PhysicBody))]

@@ -3,19 +3,19 @@ using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using ECS.Components;
+using Gabiac.ECS.Components;
 
-namespace ECS.Systems
+namespace Gabiac.ECS.Systems
 {
     [With(typeof(Renderer))]
     [With(typeof(Transform))]
-    public partial class DrawSystem : AEntitySetSystem<float>
+    public partial class RenderSystem : AEntitySetSystem<float>
     {
         private SpriteBatch spriteBatch;
         private IParallelRunner runner;
         private World world;
         
-        public DrawSystem(SpriteBatch _spriteBatch, World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
+        public RenderSystem(SpriteBatch _spriteBatch, World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
             spriteBatch = _spriteBatch;
             runner = _runner;
             world = _world;

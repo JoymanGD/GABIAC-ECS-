@@ -3,7 +3,7 @@ using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using VelcroPhysics.Factories;
 
-namespace ECS.Components
+namespace Gabiac.ECS.Components
 {
     public struct PhysicBody
     {
@@ -11,7 +11,7 @@ namespace ECS.Components
 
         public PhysicBody(World _world, Vector2 _position, float _rotation, BodyType _bodyType){
             _position = ConvertUnits.ToSimUnits(_position);
-            Body = BodyFactory.CreateRectangle(_world, 2,2, 1, _position, _rotation, _bodyType);
+            Body = BodyFactory.CreateBody(_world, _position, _rotation, _bodyType);
             Body.AngularDamping = .03f;
             Body.LinearDamping = 1f;
             Body.SleepingAllowed = true;

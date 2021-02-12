@@ -1,10 +1,10 @@
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
-using ECS.Components;
+using Gabiac.ECS.Components;
 using System;
 
-namespace ECS.Systems
+namespace Gabiac.ECS.Systems
 {
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]

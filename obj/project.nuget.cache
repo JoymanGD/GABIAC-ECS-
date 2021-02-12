@@ -1,18 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "gQkyjtQdoOWB4qgNGJQ9MKcu+8HQ7K6C+0b0Nj2KxErFXrv6xO6hL1Ud/EnDt/6h2qcyu1+7wUq9rrQ+sfAp/Q==",
+  "dgSpecHash": "4gTRuVo6ZOs0NMlmHhvSE7tiYirXca76u0N2A7Vb1vKss7pPdNjintmDiNf+oasccT0XAOn/psKmQyG4KcZ/Bw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\Toil.csproj",
+  "projectFilePath": "C:\\Users\\UserName\\Desktop\\Gabiac\\Toil.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\cyotek.drawing.bitmapfont\\2.0.1\\cyotek.drawing.bitmapfont.2.0.1.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\defaultecs.analyzer\\0.15.0\\defaultecs.analyzer.0.15.0.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\fontstashsharp.monogame\\0.9.2\\fontstashsharp.monogame.0.9.2.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\stbimagesharp\\2.22.4\\stbimagesharp.2.22.4.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\stbtruetypesharp\\1.24.7\\stbtruetypesharp.1.24.7.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.10\\microsoft.netcore.app.host.win-x64.3.1.10.nupkg.sha512"
+    "C:\\Users\\UserName\\.nuget\\packages\\cyotek.drawing.bitmapfont\\2.0.1\\cyotek.drawing.bitmapfont.2.0.1.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\defaultecs.analyzer\\0.15.0\\defaultecs.analyzer.0.15.0.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\fontstashsharp.monogame\\0.9.2\\fontstashsharp.monogame.0.9.2.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\stbimagesharp\\2.22.4\\stbimagesharp.2.22.4.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\stbtruetypesharp\\1.24.7\\stbtruetypesharp.1.24.7.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\UserName\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.10\\microsoft.netcore.app.host.win-x64.3.1.10.nupkg.sha512"
   ],
   "logs": []
 }
