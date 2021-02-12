@@ -1,12 +1,20 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
+using FontStashSharp;
+using System.IO;
 using Gabiac.Scripts.ECS.Systems;
 using Gabiac.Scripts.ECS.Components;
+using Gabiac.Scripts.Managers;
 using System;
+using Myra;
+using Myra.Graphics2D.UI;
+using Myra.Graphics2D;
+using Myra.Graphics2D.Brushes;
 
 namespace Gabiac.Scripts.Scenes
 {
@@ -17,12 +25,13 @@ namespace Gabiac.Scripts.Scenes
 
         private IParallelRunner mainRunner;
         private DefaultEcs.World world;
-        private GraphicsDeviceManager graphics;
+        private Game game;
+        private Desktop desktop;
 
 #endregion
 
-        public MenuScene(GraphicsDeviceManager _graphics){
-            graphics = _graphics;
+        public MenuScene(Game _game){
+            game = _game;
             SetupWorld();
         }
 
@@ -30,17 +39,57 @@ namespace Gabiac.Scripts.Scenes
         }
 
         public void Draw(GameTime _gameTime){
+            desktop.Render();
         }
 
-        public void PreLoad(ContentManager _contentManager){
+        public void PreLoad(){
 
         }
 
-        public void Load(ContentManager _contentManager, SpriteBatch _spriteBatch){
+        public void Load(){
+            MyraEnvironment.Game = game;
+
+            var grid = new Grid();
+            var fontSys = FontSystemFactory.Create(game.GraphicsDevice, 400, 400);
+            fontSys.AddFont(File.ReadAllBytes(@"Content/Fonts/NotoSansJP-Light.otf"));
+
+            var title = new Label
+            {
+            GridRow = 0,
+            Id = "label",
+            Text = "GABIAC",
+            Font = fontSys.GetFont(80),
+            TextColor = Color.Yellow,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Bottom
+            };
+            grid.Widgets.Add(title);
+
+            // Button
+            var button = new TextButton
+            {
+            GridRow = 1,
+            Text = "PLAY",
+            Height = 40,
+            Width = 130,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Margin = new Thickness(0,20,0,0),
+            Background = null
+            };
             
+            button.Click += (s, a) =>
+            {
+                SceneManager.instance.LoadScene(new GameScene());
+            };
+
+            grid.Widgets.Add(button);
+
+            // Add it to the desktop
+            desktop = new Desktop();
+            desktop.Root = grid;
         }
 
-        public void PostLoad(ContentManager _contentManager){
+        public void PostLoad(){
 
         }
 

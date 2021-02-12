@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using VelcroPhysics.Dynamics;
 using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;

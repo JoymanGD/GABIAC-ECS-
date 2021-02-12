@@ -8,15 +8,19 @@ namespace Gabiac.Scripts.Managers
     public class SceneManager {
         public static SceneManager instance;
         public IScene currentScene { get; private set;}
-        private SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch { get; private set;}
+        public GraphicsDeviceManager graphics { get; private set;}
+        public ContentManager contentManager { get; private set;}
         
-        public SceneManager(IScene _firstScene, SpriteBatch _spriteBatch, ContentManager _contentManager){
+        public SceneManager(IScene _firstScene, SpriteBatch _spriteBatch, GraphicsDeviceManager _graphics, ContentManager _contentManager){
             if(instance == null)
                 instance = this;
 
             spriteBatch = _spriteBatch;
+            graphics = _graphics;
+            contentManager = _contentManager;
             
-            LoadScene(_firstScene, _contentManager);
+            LoadScene(_firstScene);
         }
 
         public void Draw(GameTime gameTime){
@@ -27,10 +31,10 @@ namespace Gabiac.Scripts.Managers
             currentScene.Update(gameTime);
         }
 
-        public void LoadScene(IScene _scene, ContentManager _contentManager){
-            _scene.PreLoad(_contentManager);
-            _scene.Load(_contentManager, spriteBatch);
-            _scene.PostLoad(_contentManager);
+        public void LoadScene(IScene _scene){
+            _scene.PreLoad();
+            _scene.Load();
+            _scene.PostLoad();
 
             var lastScene = currentScene;
 

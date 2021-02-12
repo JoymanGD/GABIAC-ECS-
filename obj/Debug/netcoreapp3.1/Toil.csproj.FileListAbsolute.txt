@@ -82,3 +82,8 @@ C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\Cyotek.Drawing.BitmapFo
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\FontStashSharp.MonoGame.dll
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\StbImageSharp.dll
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\StbTrueTypeSharp.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\AssetManagementBase.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\info.lundin.math.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\MonoGame.Extended.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\Myra.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

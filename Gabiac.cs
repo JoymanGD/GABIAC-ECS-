@@ -30,7 +30,7 @@ namespace Gabiac
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            new SceneManager(new GameScene(graphics), spriteBatch, Content);
+            new SceneManager(new MenuScene(this), spriteBatch, graphics, Content);
         }
 
         protected override void Update(GameTime _gameTime)
