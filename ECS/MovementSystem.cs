@@ -1,10 +1,8 @@
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
 using ECS.Components;
-using VelcroPhysics.Utilities;
+using System;
 
 namespace ECS.Systems
 {
@@ -21,8 +19,10 @@ namespace ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in Controller _controller){            
-            _physicBody.Body.ApplyForce(_controller.Direction * _controller.Speed);
+        private void Update(ref PhysicBody _physicBody, in Controller _controller){
+            _physicBody.Body.ApplyForce(_controller.MovementDirection * _controller.Speed);
+            var lookDir = _controller.LookDirection;
+            _physicBody.SetRotation((float)Math.Atan2(lookDir.Y, lookDir.X));
         }
     }
 }

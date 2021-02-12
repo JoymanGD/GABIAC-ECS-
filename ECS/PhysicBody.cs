@@ -11,7 +11,10 @@ namespace ECS.Components
 
         public PhysicBody(World _world, Vector2 _position, float _rotation, BodyType _bodyType){
             _position = ConvertUnits.ToSimUnits(_position);
-            Body = BodyFactory.CreateBody(_world, _position, _rotation, _bodyType);
+            Body = BodyFactory.CreateRectangle(_world, 2,2, 1, _position, _rotation, _bodyType);
+            Body.AngularDamping = .03f;
+            Body.LinearDamping = 1f;
+            Body.SleepingAllowed = true;
         }
 
         public void SetBody(Body _body){

@@ -1,5 +1,3 @@
-using System.Reflection;
-using System.Net.Mime;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 

@@ -74,3 +74,7 @@ C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\DefaultEcs.dll
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\VelcroPhysics.MonoGame.dll
 C:\Users\UserName\Desktop\Gabiac\obj\Debug\netcoreapp3.1\Toil.csproj.CopyComplete
 C:\Users\UserName\Desktop\Gabiac\obj\Debug\netcoreapp3.1\Toil.genruntimeconfig.cache
+C:\Users\v.kruglyakov\Desktop\Projects\Gabiac\bin\Debug\netcoreapp3.1\Cyotek.Drawing.BitmapFont.dll
+C:\Users\v.kruglyakov\Desktop\Projects\Gabiac\bin\Debug\netcoreapp3.1\FontStashSharp.MonoGame.dll
+C:\Users\v.kruglyakov\Desktop\Projects\Gabiac\bin\Debug\netcoreapp3.1\StbImageSharp.dll
+C:\Users\v.kruglyakov\Desktop\Projects\Gabiac\bin\Debug\netcoreapp3.1\StbTrueTypeSharp.dll

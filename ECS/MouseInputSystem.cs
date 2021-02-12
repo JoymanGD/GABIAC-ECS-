@@ -27,10 +27,11 @@ namespace ECS.Systems
                 Vector2 mousePos = state.Position.ToVector2();
                 var dir = mousePos - _physicBody.Position();
                 dir.Normalize();
-                _controller.SetDirection(dir);
+                _controller.SetMovementDirection(dir);
+                _controller.SetLookDirection(dir);
             }
             else{
-                _controller.SetDirection(Vector2.Zero);
+                _controller.SetMovementDirection(Vector2.Zero);
             }
         }
     }
