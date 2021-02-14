@@ -1,14 +1,16 @@
+using System.Diagnostics.SymbolStore;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Systems;
 using Gabiac.Scripts.ECS.Components;
 using Gabiac.Scripts.Managers;
+using LilyPath;
+using LilyPath.Utility;
+using LilyPath.Shapes;
 using System;
-
 namespace Gabiac.Scripts.Scenes
 {
     public class GameScene : IScene
@@ -19,8 +21,8 @@ namespace Gabiac.Scripts.Scenes
         private Entity player;
         private ISystem<float> updateSystems;
         private ISystem<float> drawSystems;
-        private IParallelRunner mainRunner;
-        private DefaultEcs.World world;
+        private IParallelRunner mainRunner;MonoGame.SplineFlower.BezierCurve sad;
+        private DefaultEcs.World world; private DrawBatch drawBatch; Pen pen;
 
 #endregion
 
@@ -36,6 +38,7 @@ namespace Gabiac.Scripts.Scenes
         }
 
         public void Draw(GameTime _gameTime){
+            drawBatch.DrawBezier(pen, new Vector2(200,200), new Vector2(250,250), new Vector2(400, 200));
             drawSystems.Update((float)_gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
@@ -45,7 +48,9 @@ namespace Gabiac.Scripts.Scenes
 
         public void Load(){
             var spriteBatch = SceneManager.instance.spriteBatch;
-            
+            var graphics = SceneManager.instance.graphics;
+            drawBatch = new DrawBatch(graphics.GraphicsDevice);
+            pen = new Pen(Color.Red);
             updateSystems = new SequentialSystem<float>(
                 new MouseInputSystem(world, mainRunner),
                 new MovementSystem(world, mainRunner),
@@ -54,7 +59,7 @@ namespace Gabiac.Scripts.Scenes
 
             drawSystems = new SequentialSystem<float>(
                 new RenderSystem(spriteBatch, world, mainRunner),
-                new DebugSystem(SceneManager.instance.graphics, spriteBatch, world, mainRunner)
+                new DebugSystem(graphics, spriteBatch, world, mainRunner)
             );
         }
 

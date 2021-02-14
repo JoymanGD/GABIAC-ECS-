@@ -1,0 +1,2 @@
+C:\Users\UserName\Downloads\LilyPath-master\LilyPath-master\LilyPath\obj\Release\LilyPath.csprojAssemblyReference.cache
+C:\Users\UserName\Downloads\LilyPath-master\LilyPath-master\LilyPath\obj\Release\LilyPath.csproj.CoreCompileInputs.cache

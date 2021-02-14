@@ -50,6 +50,7 @@ namespace Gabiac.Scripts.Scenes
             MyraEnvironment.Game = game;
 
             var grid = new Grid();
+            //grid.ShowGridLines = true;
             var fontSys = FontSystemFactory.Create(game.GraphicsDevice, 400, 400);
             fontSys.AddFont(File.ReadAllBytes(@"Content/Fonts/NotoSansJP-Light.otf"));
 

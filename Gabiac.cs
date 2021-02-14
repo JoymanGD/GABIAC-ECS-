@@ -35,8 +35,6 @@ namespace Gabiac
 
         protected override void Update(GameTime _gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             
             SceneManager.instance.Update(_gameTime);
 
