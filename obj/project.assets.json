@@ -109,6 +109,18 @@
           "lib/netstandard2.0/MonoGame.Extended.Input.dll": {}
         }
       },
+      "MonoGame.Extended.Particles/3.8.0": {
+        "type": "package",
+        "dependencies": {
+          "MonoGame.Extended": "3.8.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/MonoGame.Extended.Particles.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MonoGame.Extended.Particles.dll": {}
+        }
+      },
       "MonoGame.Framework.DesktopGL/3.8.0.1641": {
         "type": "package",
         "compile": {
@@ -153,17 +165,6 @@
             "assetType": "native",
             "rid": "win-x86"
           }
-        }
-      },
-      "MonoGame.SplineFlower/1.5.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net461/MonoGame.SplineFlower.Utils.dll": {},
-          "lib/net461/MonoGame.SplineFlower.dll": {}
-        },
-        "runtime": {
-          "lib/net461/MonoGame.SplineFlower.Utils.dll": {},
-          "lib/net461/MonoGame.SplineFlower.dll": {}
         }
       },
       "Myra/1.2.2": {
@@ -456,6 +457,18 @@
         "monogame.extended.input.nuspec"
       ]
     },
+    "MonoGame.Extended.Particles/3.8.0": {
+      "sha512": "n0dCPPa+96rf/+ohqbKFv+wEjcz1g5xHAQpmS9jveisVSrvzyA2uP0av9DqNCXKarjCXACah5eqh0nO1SiwoOg==",
+      "type": "package",
+      "path": "monogame.extended.particles/3.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/MonoGame.Extended.Particles.dll",
+        "monogame.extended.particles.3.8.0.nupkg.sha512",
+        "monogame.extended.particles.nuspec"
+      ]
+    },
     "MonoGame.Framework.DesktopGL/3.8.0.1641": {
       "sha512": "rJQlrlHQbnOECYV6EcQ8GlGRQ2lzPTroXQcyyOZ0ki+BQRSJEN2zVBm9skqLiXya348aGAfTSSGTaSKjAy9NaA==",
       "type": "package",
@@ -479,19 +492,6 @@
         "runtimes/win-x64/native/soft_oal.dll",
         "runtimes/win-x86/native/SDL2.dll",
         "runtimes/win-x86/native/soft_oal.dll"
-      ]
-    },
-    "MonoGame.SplineFlower/1.5.0.1": {
-      "sha512": "GDUcW0T4czpstPx38B0d2iGgIzUKOauS2r2/NHE2czsycPdPqYEohcUBOgv1VvSvrWTUCBAkVlWnINHAn8plFw==",
-      "type": "package",
-      "path": "monogame.splineflower/1.5.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net461/MonoGame.SplineFlower.Utils.dll",
-        "lib/net461/MonoGame.SplineFlower.dll",
-        "monogame.splineflower.1.5.0.1.nupkg.sha512",
-        "monogame.splineflower.nuspec"
       ]
     },
     "Myra/1.2.2": {
@@ -572,8 +572,8 @@
       "MonoGame.Content.Builder.Task >= 3.8.0.1641",
       "MonoGame.Extended.Graphics >= 3.8.0",
       "MonoGame.Extended.Gui >= 3.8.0",
+      "MonoGame.Extended.Particles >= 3.8.0",
       "MonoGame.Framework.DesktopGL >= 3.8.0.1641",
-      "MonoGame.SplineFlower >= 1.5.0.1",
       "Myra >= 1.2.2"
     ]
   },
@@ -645,13 +645,13 @@
             "target": "Package",
             "version": "[3.8.0, )"
           },
+          "MonoGame.Extended.Particles": {
+            "target": "Package",
+            "version": "[3.8.0, )"
+          },
           "MonoGame.Framework.DesktopGL": {
             "target": "Package",
             "version": "[3.8.0.1641, )"
-          },
-          "MonoGame.SplineFlower": {
-            "target": "Package",
-            "version": "[1.5.0.1, )"
           },
           "Myra": {
             "target": "Package",
@@ -686,17 +686,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Пакет \"MonoGame.SplineFlower 1.5.0.1\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
-      "libraryId": "MonoGame.SplineFlower",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }

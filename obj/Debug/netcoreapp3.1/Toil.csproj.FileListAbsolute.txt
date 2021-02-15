@@ -87,3 +87,7 @@ C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\info.lundin.math.dll
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\MonoGame.Extended.dll
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\Myra.dll
 C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\MonoGame.Extended.Graphics.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\MonoGame.Extended.Gui.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\MonoGame.Extended.Input.dll
+C:\Users\UserName\Desktop\Gabiac\bin\Debug\netcoreapp3.1\MonoGame.Extended.Particles.dll

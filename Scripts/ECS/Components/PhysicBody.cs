@@ -10,12 +10,16 @@ namespace Gabiac.Scripts.ECS.Components
     {
         public Body Body {get; private set;}
 
-        public PhysicBody(World _world, Vector2 _position, float _rotation, BodyType _bodyType){
+        public PhysicBody(World _world, Vector2 _position, Vector2 _scale, float _rotation, BodyType _bodyType){
             _position = ConvertUnits.ToSimUnits(_position);
-            Body = BodyFactory.CreateBody(_world, _position, _rotation, _bodyType);
+            _rotation = ConvertUnits.ToSimUnits(_rotation);
+            _scale = ConvertUnits.ToSimUnits(_scale);
+            
+            Body = BodyFactory.CreateRectangle(_world, _scale.X, _scale.Y, 1, _position, _rotation, _bodyType);
             Body.AngularDamping = .03f;
             Body.LinearDamping = 1f;
             Body.SleepingAllowed = true;
+            Body.FixedRotation = true;
         }
 
         public void SetBody(Body _body){

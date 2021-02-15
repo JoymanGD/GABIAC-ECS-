@@ -9,8 +9,8 @@ namespace Gabiac.Scripts.ECS.Components
         public float Rotation {get; private set;}
         private Vector2 lastPos;
 
-        public Transform(Vector2 _position, Vector2 _scale, float _rotation){
-            Position = _position;
+        public Transform(Vector2 _scale, float _rotation){
+            Position = Vector2.Zero;
             Scale = _scale;
             Rotation = _rotation;
             lastPos = Position;

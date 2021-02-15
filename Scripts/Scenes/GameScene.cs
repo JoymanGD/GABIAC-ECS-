@@ -7,9 +7,6 @@ using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Systems;
 using Gabiac.Scripts.ECS.Components;
 using Gabiac.Scripts.Managers;
-using LilyPath;
-using LilyPath.Utility;
-using LilyPath.Shapes;
 using System;
 namespace Gabiac.Scripts.Scenes
 {
@@ -18,11 +15,10 @@ namespace Gabiac.Scripts.Scenes
 
 #region ECS
 
-        private Entity player;
         private ISystem<float> updateSystems;
         private ISystem<float> drawSystems;
-        private IParallelRunner mainRunner;MonoGame.SplineFlower.BezierCurve sad;
-        private DefaultEcs.World world; private DrawBatch drawBatch; Pen pen;
+        private IParallelRunner mainRunner;
+        private DefaultEcs.World world;
 
 #endregion
 
@@ -38,7 +34,6 @@ namespace Gabiac.Scripts.Scenes
         }
 
         public void Draw(GameTime _gameTime){
-            drawBatch.DrawBezier(pen, new Vector2(200,200), new Vector2(250,250), new Vector2(400, 200));
             drawSystems.Update((float)_gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
@@ -49,8 +44,6 @@ namespace Gabiac.Scripts.Scenes
         public void Load(){
             var spriteBatch = SceneManager.instance.spriteBatch;
             var graphics = SceneManager.instance.graphics;
-            drawBatch = new DrawBatch(graphics.GraphicsDevice);
-            pen = new Pen(Color.Red);
             updateSystems = new SequentialSystem<float>(
                 new MouseInputSystem(world, mainRunner),
                 new MovementSystem(world, mainRunner),
@@ -58,9 +51,10 @@ namespace Gabiac.Scripts.Scenes
             );
 
             drawSystems = new SequentialSystem<float>(
+                new RocketFireSystem(world, spriteBatch, mainRunner),
                 new RenderSystem(spriteBatch, world, mainRunner),
                 new DebugSystem(graphics, spriteBatch, world, mainRunner)
-            );
+                );
         }
 
         public void PostLoad(){
@@ -68,7 +62,8 @@ namespace Gabiac.Scripts.Scenes
         }
 
         public void Unload(){
-
+            drawSystems.Dispose();
+            updateSystems.Dispose();
         }
 
 #region Setup
@@ -80,12 +75,20 @@ namespace Gabiac.Scripts.Scenes
         }
 
         private void SetupPlayer(){
-            player = world.CreateEntity();
-            player.Set(new Transform(new Vector2(200, 200), new Vector2(1,1), 0));
-            player.Set(new Controller(Vector2.Zero, 10, false));
-            player.Set(new PhysicBody(physicWorld, new Vector2(200,200), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
-            player.Set(new Renderer(Texture2D.FromFile(SceneManager.instance.graphics.GraphicsDevice, "Content/Car.png"), Color.White));
+            var player = world.CreateEntity();
+            var texture = Texture2D.FromFile(SceneManager.instance.graphics.GraphicsDevice, "Content/Car.png");
+
+            player.Set(new Transform(new Vector2(1,1), 0));
+            player.Set(new Controller(Vector2.Zero, 3, false));
+            player.Set(new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
+            player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
+            player.Set(new RocketFire());
+            
+            var player1 = world.CreateEntity();
+            player1.Set(new Transform(new Vector2(1,1), 0));
+            player1.Set(new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
+            player1.Set(new Renderer(texture, Color.Red));
         }
 
 #endregion
