@@ -1,13 +1,9 @@
-using System.Diagnostics.SymbolStore;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using DefaultEcs;
 using DefaultEcs.System;
-using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Systems;
-using Gabiac.Scripts.ECS.Components;
 using Gabiac.Scripts.Managers;
-using System;
+using Gabiac.Scripts.Helpers;
+
 namespace Gabiac.Scripts.Scenes
 {
     public class GameScene : IScene
@@ -17,33 +13,28 @@ namespace Gabiac.Scripts.Scenes
 
         private ISystem<float> updateSystems;
         private ISystem<float> drawSystems;
-        private IParallelRunner mainRunner;
-        private DefaultEcs.World world;
 
 #endregion
 
-        private VelcroPhysics.Dynamics.World physicWorld;
-
-        public GameScene(){
-            SetupWorld();
-            SetupPlayer();
-        }
-
-        public void Update(GameTime _gameTime){
+        public override void Update(GameTime _gameTime){
             updateSystems.Update((float)_gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
-        public void Draw(GameTime _gameTime){
+        public override void Draw(GameTime _gameTime){
             drawSystems.Update((float)_gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
-        public void PreLoad(){
+        public override void PreLoad(){
 
         }
 
-        public void Load(){
-            var spriteBatch = SceneManager.instance.spriteBatch;
-            var graphics = SceneManager.instance.graphics;
+        public override void Load(){
+            var spriteBatch = GabiacSettings.spriteBatch;
+            var graphics = GabiacSettings.graphics;
+            var world = GabiacSettings.world;
+            var mainRunner = GabiacSettings.mainRunner;
+            var physicWorld = GabiacSettings.physicWorld;
+
             updateSystems = new SequentialSystem<float>(
                 new MouseInputSystem(world, mainRunner),
                 new MovementSystem(world, mainRunner),
@@ -57,41 +48,13 @@ namespace Gabiac.Scripts.Scenes
                 );
         }
 
-        public void PostLoad(){
+        public override void PostLoad(){
 
         }
 
-        public void Unload(){
+        public override void Unload(){
             drawSystems.Dispose();
             updateSystems.Dispose();
         }
-
-#region Setup
-
-        private void SetupWorld(){
-            mainRunner = new DefaultParallelRunner(Environment.ProcessorCount);
-            world = new DefaultEcs.World();
-            physicWorld = new VelcroPhysics.Dynamics.World(Vector2.Zero);
-        }
-
-        private void SetupPlayer(){
-            var player = world.CreateEntity();
-            var texture = Texture2D.FromFile(SceneManager.instance.graphics.GraphicsDevice, "Content/Car.png");
-
-            player.Set(new Transform(new Vector2(1,1), 0));
-            player.Set(new Controller(Vector2.Zero, 3, false));
-            player.Set(new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
-            player.Set(new Renderer(texture, Color.White));
-            player.Set(new Player());
-            player.Set(new RocketFire());
-            
-            var player1 = world.CreateEntity();
-            player1.Set(new Transform(new Vector2(1,1), 0));
-            player1.Set(new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
-            player1.Set(new Renderer(texture, Color.Red));
-        }
-
-#endregion
-
     }
 }

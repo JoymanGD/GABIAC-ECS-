@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/UserName/Desktop/Gabiac/Content/Car.png</File>
+    <File>c:/Users/v.kruglyakov/Desktop/Projects/Gabiac/Content/Car.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

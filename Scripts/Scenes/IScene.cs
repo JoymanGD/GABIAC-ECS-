@@ -1,15 +1,14 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+using Gabiac.Scripts.Helpers;
 
 namespace Gabiac.Scripts.Scenes
 {
-    public interface IScene {
-        void Update(GameTime _gameTime);
-        void Draw(GameTime _gameTime);
-        void PreLoad();
-        void Load();
-        void PostLoad();
-        void Unload();
+    public abstract class IScene : Product {
+        public abstract void Update(GameTime _gameTime);
+        public abstract void Draw(GameTime _gameTime);
+        public abstract void PreLoad();
+        public abstract void Load();
+        public abstract void PostLoad();
+        public abstract void Unload();
     }
 }

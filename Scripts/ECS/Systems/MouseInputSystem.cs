@@ -24,16 +24,16 @@ namespace Gabiac.Scripts.ECS.Systems
         [Update]
         private void Update(ref Controller _controller, in PhysicBody _physicBody){
             var state = Mouse.GetState();
+            Vector2 mousePos = state.Position.ToVector2();
+            var dir = mousePos - _physicBody.Position();
+            dir.Normalize();
             if(state.LeftButton == ButtonState.Pressed){
-                Vector2 mousePos = state.Position.ToVector2();
-                var dir = mousePos - _physicBody.Position();
-                dir.Normalize();
                 _controller.SetMovementDirection(dir);
-                _controller.SetLookDirection(dir);
             }
             else{
                 _controller.SetMovementDirection(Vector2.Zero);
             }
+            _controller.SetLookDirection(dir);
         }
     }
 }

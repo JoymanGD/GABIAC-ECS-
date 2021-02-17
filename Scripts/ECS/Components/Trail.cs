@@ -1,5 +1,4 @@
-using System.Reflection;
-using System.Net.Mime;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
@@ -7,14 +6,20 @@ namespace Gabiac.Scripts.ECS.Components
 {
     public struct Trail
     {
-        public int PointsCount { get; private set; }
+        public int MaxPointsCount { get; private set; }
         public float PointsDistance { get; private set; }
-        public float TrailLength { get; private set; }
+        public LinkedList<TrailPoint> TrailPoints;
+        public TrailPoint[] Pool;
 
-        public Trail(int _pointsCount, float _pointsDistance, float _trailLength){
-            PointsCount = _pointsCount;
+        public Trail(int _maxPointsCount, float _pointsDistance){
+            MaxPointsCount = _maxPointsCount;
             PointsDistance = _pointsDistance;
-            TrailLength = _trailLength;
+            TrailPoints = new LinkedList<TrailPoint>();
+            Pool = new TrailPoint[MaxPointsCount];
+            for (var i = 0; i < MaxPointsCount; i++)
+            {
+                Pool[i] = new TrailPoint();
+            }
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>info.lundin.math.dll</id>
+    <version>1.2.6</version>
+    <authors>Patrik Lundin</authors>
+    <owners>Patrik Lundin</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://opensource.org/licenses/ms-pl.html</licenseUrl>
+    <projectUrl>http://lundin.info/mathparser</projectUrl>
+    <description>Math expression parser, evaluates a string mathematical expression and returns a double value.</description>
+    <releaseNotes>Fixed issue with scientific exponent notation</releaseNotes>
+    <copyright>Copyright 2019 Patrik Lundin</copyright>
+    <tags>Math Expression Parser</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+</package>

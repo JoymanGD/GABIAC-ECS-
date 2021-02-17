@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>DefaultEcs.Analyzer</id>
+    <version>0.15.0</version>
+    <authors>Paillat Laszlo</authors>
+    <developmentDependency>true</developmentDependency>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>logo.png</icon>
+    <projectUrl>https://github.com/Doraku/DefaultEcs.Analyzer</projectUrl>
+    <description>Roslyn analyzers for DefaultEcs users.</description>
+    <releaseNotes>added code generation for entity system with Update attribute</releaseNotes>
+    <tags>gamedev game-development game-engine ecs entity-component-system</tags>
+    <repository type="git" url="https://github.com/Doraku/DefaultEcs.Analyzer.git" commit="441f379e036fae8a380afc96d9af80c62b327c94" />
+  </metadata>
+</package>

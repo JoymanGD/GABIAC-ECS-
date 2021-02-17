@@ -34,9 +34,11 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(float _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(ref Transform _transform){
+        private void Update(ref Transform _transform, float elapsedTime){
             spriteBatch.DrawString(font, 
                                         
+                                        "FPS: " + elapsedTime + 
+                                        "\n" +
                                         "Velocity: " + _transform.GetDeltaPosition().ToString() + 
                                         "\n" +
                                         "Position: " + _transform.Position.ToString() + 

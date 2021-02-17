@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>StbTrueTypeSharp</id>
+    <version>1.24.7</version>
+    <authors>StbTrueTypeSharpTeam</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/rds1983/StbSharp</projectUrl>
+    <description>C# port of stb_truetype.h</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+</package>

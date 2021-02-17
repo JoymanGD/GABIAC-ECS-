@@ -1,20 +1,13 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
-using DefaultEcs;
-using DefaultEcs.System;
 using DefaultEcs.Threading;
 using FontStashSharp;
 using System.IO;
-using Gabiac.Scripts.ECS.Systems;
-using Gabiac.Scripts.ECS.Components;
 using Gabiac.Scripts.Managers;
 using System;
 using Myra;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D;
-using Myra.Graphics2D.Brushes;
+using Gabiac.Scripts.Helpers;
 
 namespace Gabiac.Scripts.Scenes
 {
@@ -22,36 +15,27 @@ namespace Gabiac.Scripts.Scenes
     {
 
 #region ECS
-
-        private IParallelRunner mainRunner;
-        private DefaultEcs.World world;
-        private Game game;
         private Desktop desktop;
 
 #endregion
 
-        public MenuScene(Game _game){
-            game = _game;
-            SetupWorld();
+        public override void Update(GameTime _gameTime){
         }
 
-        public void Update(GameTime _gameTime){
-        }
-
-        public void Draw(GameTime _gameTime){
+        public override void Draw(GameTime _gameTime){
             desktop.Render();
         }
 
-        public void PreLoad(){
+        public override void PreLoad(){
 
         }
 
-        public void Load(){
-            MyraEnvironment.Game = game;
+        public override void Load(){
+            MyraEnvironment.Game = GabiacSettings.game;
 
             var grid = new Grid();
             //grid.ShowGridLines = true;
-            var fontSys = FontSystemFactory.Create(game.GraphicsDevice, 400, 400);
+            var fontSys = FontSystemFactory.Create(GabiacSettings.game.GraphicsDevice, 400, 400);
             fontSys.AddFont(File.ReadAllBytes(@"Content/Fonts/NotoSansJP-Light.otf"));
 
             var title = new Label
@@ -80,7 +64,7 @@ namespace Gabiac.Scripts.Scenes
             
             button.Click += (s, a) =>
             {
-                SceneManager.instance.LoadScene(new GameScene());
+                SceneManager.LoadScene<GameScene>();
             };
 
             grid.Widgets.Add(button);
@@ -90,22 +74,12 @@ namespace Gabiac.Scripts.Scenes
             desktop.Root = grid;
         }
 
-        public void PostLoad(){
+        public override void PostLoad(){
 
         }
 
-        public void Unload(){
+        public override void Unload(){
 
         }
-
-#region Setup
-
-        private void SetupWorld(){
-            mainRunner = new DefaultParallelRunner(Environment.ProcessorCount);
-            world = new DefaultEcs.World();
-        }
-
-#endregion
-
     }
 }

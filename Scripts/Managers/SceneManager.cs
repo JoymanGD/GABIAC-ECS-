@@ -1,37 +1,33 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 using Gabiac.Scripts.Scenes;
+using System.Collections.Generic;
+using System.Linq;
+using Gabiac.Scripts.Helpers;
 
 namespace Gabiac.Scripts.Managers
 {
-    public class SceneManager {
-        public static SceneManager instance;
-        public IScene currentScene { get; private set;}
-        public SpriteBatch spriteBatch { get; private set;}
-        public GraphicsDeviceManager graphics { get; private set;}
-        public ContentManager contentManager { get; private set;}
-        
-        public SceneManager(IScene _firstScene, SpriteBatch _spriteBatch, GraphicsDeviceManager _graphics, ContentManager _contentManager){
-            if(instance == null)
-                instance = this;
+    public static class SceneManager {
+        private static List<IScene> scenes = new List<IScene>();
+        public static IScene currentScene { get; private set;}
 
-            spriteBatch = _spriteBatch;
-            graphics = _graphics;
-            contentManager = _contentManager;
-            
-            LoadScene(_firstScene);
-        }
-
-        public void Draw(GameTime gameTime){
+        public static void Draw(GameTime gameTime){
             currentScene.Draw(gameTime);
         }
 
-        public void Update(GameTime gameTime){
+        public static void Update(GameTime gameTime){
             currentScene.Update(gameTime);
         }
 
-        public void LoadScene(IScene _scene){
+        public static IScene GetScene<T>() where T:IScene{
+            return scenes.FirstOrDefault(c=>c.GetType()==typeof(T));
+        }
+
+        public static void LoadScene<T>() where T:IScene{
+            var _scene = GetScene<T>();
+            if(_scene == null){
+                _scene = (IScene)SceneCreator.instance.Create<T>();
+                scenes.Add(_scene);
+            }
             _scene.PreLoad();
             _scene.Load();
             _scene.PostLoad();
