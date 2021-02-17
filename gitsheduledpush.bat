@@ -1,3 +1,3 @@
-git add . 
-git commit -m "scheduled commit"
-git push
+git add . >> batlog.txt
+git commit -m "scheduled commit %date% %time%" >> batlog.txt
+git push >> batlog.txt
