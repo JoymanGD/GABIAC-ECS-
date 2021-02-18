@@ -1,4 +1,4 @@
 git add .
-git commit -m "Scheduled commit %date% %time%"
+git commit -m "Scheduled commit %date% %time%" >> batlog.txt
 echo. >> batlog.txt
-git push >> batlog.txt
+git push
