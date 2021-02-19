@@ -7,3 +7,7 @@
 [DefaultECS cac6039] Scheduled commit 18.02.2021 19:00:00,51
  4 files changed, 0 insertions(+), 0 deletions(-)
  
+[DefaultECS 1c58b57] Scheduled commit 19.02.2021 19:00:01,64
+ 12 files changed, 67 insertions(+), 49 deletions(-)
+ delete mode 100644 Scripts/ECS/Components/TrailPoint.cs
+ 

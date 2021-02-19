@@ -13,6 +13,8 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Trail))]
     [With(typeof(Transform))]
+    [With(typeof(Controller))]
+    [With(typeof(PhysicBody))]
     public partial class TrailSystem : AEntitySetSystem<float>
     {
         private SpriteBatch spriteBatch;
@@ -30,14 +32,20 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(float _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(in Transform _transform, ref Trail _trail){
-            int currentTrailLength = Math.Clamp((int)_transform.GetDeltaPosition(), 0, _trail.MaxPointsCount);
+        private void Update(in Transform _transform, ref Trail _trail, in Controller _controller, in PhysicBody _physicBody){
+            //logic
+            int currentTrailLength = Math.Clamp((int)(_transform.DeltaPosition/2), 0, _trail.MaxPointsCount);
+            if(_trail.TrailPoints.Count < currentTrailLength){
+                AddTrailPoint(_trail, _controller.MovementDirection);
+            }
+            else if(_trail.TrailPoints.Count > currentTrailLength){
+                RemoveTrailPoint(_trail);
+            }
+
+            //debug draw
             foreach (var trailPoint in _trail.TrailPoints)
             {
-                //spriteBatch.DrawCircle(trailPoint.Position, 20, Color.Green);
-            }
-            if(_trail.TrailPoints.Count < currentTrailLength){
-                
+                spriteBatch.DrawCircle(ConvertUnits.ToDisplayUnits(trailPoint.Position), 20, 32, Color.Green);
             }
         }
 
@@ -45,20 +53,26 @@ namespace Gabiac.Scripts.ECS.Systems
             var _pool = _trail.Pool;
             var _list = _trail.TrailPoints;
             if(_pool.Count > 0){
-                var body = _pool.Last.Value;
-                var lastPoint = _list.Last.Value;
+                var lastPoolNode = _pool.Last;
+                var body = lastPoolNode.Value;
+                Body lastPoint;
+
+                if(_list.Count == 0)
+                    lastPoint = _trail.Car;
+                else
+                    lastPoint = _list.Last.Value;
                 
-                body.Position = lastPoint.Position + ConvertUnits.ToSimUnits(_direction * _trail.PointsDistance);
+                body.Position = lastPoint.Position + ConvertUnits.ToSimUnits(-_direction * _trail.PointsDistance);
                 body.Enabled = true;
 
                 //creating joint
                 var anchor = Vector2.Lerp(lastPoint.Position, body.Position, .5f);
-                var dj = new DistanceJoint(lastPoint, body, anchor, anchor);
-                physicWorld.AddJoint(dj);
+                var joint = new RopeJoint(lastPoint, body, anchor, anchor);
+                physicWorld.AddJoint(joint);
 
                 //pooling
-                _list.AddLast(_pool.Last);
                 _pool.RemoveLast();
+                _list.AddLast(lastPoolNode);
             }
         }
 
@@ -66,7 +80,8 @@ namespace Gabiac.Scripts.ECS.Systems
             var _pool = _trail.Pool;
             var _list = _trail.TrailPoints;
             if(_pool.Count < _trail.MaxPointsCount){
-                var body = _list.Last.Value;
+                var lastListNode = _list.Last;
+                var body = lastListNode.Value;
 
                 body.Enabled = false;
 
@@ -74,8 +89,8 @@ namespace Gabiac.Scripts.ECS.Systems
                 physicWorld.RemoveJoint(body.JointList.Joint);
 
                 //pooling
-                _pool.AddLast(_list.Last);
                 _list.RemoveLast();
+                _pool.AddLast(lastListNode);
             }
         }
 

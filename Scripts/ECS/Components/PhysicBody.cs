@@ -3,6 +3,7 @@ using VelcroPhysics.Dynamics;
 using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using VelcroPhysics.Factories;
+using VelcroPhysics.Collision.Filtering;
 
 namespace Gabiac.Scripts.ECS.Components
 {
@@ -18,6 +19,7 @@ namespace Gabiac.Scripts.ECS.Components
             Body = BodyFactory.CreateRectangle(_world, _scale.X, _scale.Y, 1, _position, _rotation, _bodyType);
             Body.AngularDamping = .03f;
             Body.LinearDamping = 1f;
+            Body.CollisionCategories = Category.Cat9;
             Body.SleepingAllowed = true;
             Body.FixedRotation = true;
         }
@@ -50,6 +52,15 @@ namespace Gabiac.Scripts.ECS.Components
             else
                 _rotation = Body.Rotation;
             return _rotation;
+        }
+
+        public float AngularVelocity(bool UnSim = true){
+            float _angularVelocity;
+            if(UnSim)
+                _angularVelocity = ConvertUnits.ToDisplayUnits(Body.AngularVelocity);
+            else
+                _angularVelocity = Body.AngularVelocity;
+            return _angularVelocity;
         }
     }
 }

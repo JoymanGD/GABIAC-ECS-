@@ -70,7 +70,7 @@ namespace Gabiac.Scripts.ECS.Systems
         private void Update(in Renderer _renderer, in Transform _transform, float elapsedTime){
             particleEffect.Update(elapsedTime/100);
             foreach(var emit in particleEffect.Emitters){
-                var tak = (int)_transform.GetDeltaPosition();
+                var tak = (int)_transform.DeltaPosition;
                 emit.Parameters.Opacity = tak*10;
             }
             Vector2 offset = new Vector2(_renderer.Image.Width * _transform.Scale.X / 2, 0);

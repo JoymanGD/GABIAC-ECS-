@@ -37,9 +37,9 @@ namespace Gabiac.Scripts.ECS.Systems
         private void Update(ref Transform _transform, float elapsedTime){
             spriteBatch.DrawString(font, 
                                         
-                                        "FPS: " + elapsedTime + 
+                                        "FPS: " + 1/(elapsedTime/100) + 
                                         "\n" +
-                                        "Velocity: " + _transform.GetDeltaPosition().ToString() + 
+                                        "Velocity: " + _transform.DeltaPosition.ToString() + 
                                         "\n" +
                                         "Position: " + _transform.Position.ToString() + 
                                         "\n" +

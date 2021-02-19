@@ -46,7 +46,7 @@ namespace Gabiac.Scripts.Scenes
                 new RenderSystem(spriteBatch, world, mainRunner),
                 new DebugSystem(graphics, spriteBatch, world, mainRunner),
                 new TrailSystem(spriteBatch, world, mainRunner, physicWorld)
-                );
+            );
         }
 
         public override void PostLoad(){
