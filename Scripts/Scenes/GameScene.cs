@@ -44,7 +44,8 @@ namespace Gabiac.Scripts.Scenes
             drawSystems = new SequentialSystem<float>(
                 new RocketFireSystem(world, spriteBatch, mainRunner),
                 new RenderSystem(spriteBatch, world, mainRunner),
-                new DebugSystem(graphics, spriteBatch, world, mainRunner)
+                new DebugSystem(graphics, spriteBatch, world, mainRunner),
+                new TrailSystem(spriteBatch, world, mainRunner, physicWorld)
                 );
         }
 

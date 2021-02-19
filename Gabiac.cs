@@ -75,17 +75,19 @@ namespace Gabiac
         private void SetupEntities(){
             var player = GabiacSettings.world.CreateEntity();
             var texture = Texture2D.FromFile(GabiacSettings.graphics.GraphicsDevice, "Content/Car.png");
+            var physicWorld = GabiacSettings.physicWorld;
 
             player.Set(new Transform(new Vector2(1,1), 0));
             player.Set(new Controller(Vector2.Zero, 3, false));
-            player.Set(new PhysicBody(GabiacSettings.physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
+            player.Set(new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
             player.Set(new RocketFire());
+            player.Set(new Trail(8, 40, physicWorld));
             
             var player1 = GabiacSettings.world.CreateEntity();
             player1.Set(new Transform(new Vector2(1,1), 0));
-            player1.Set(new PhysicBody(GabiacSettings.physicWorld, new Vector2(400,400), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
+            player1.Set(new PhysicBody(physicWorld, new Vector2(400,400), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
             player1.Set(new Renderer(texture, Color.Red));
         }
 
