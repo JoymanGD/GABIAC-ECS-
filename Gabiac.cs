@@ -79,12 +79,12 @@ namespace Gabiac
 
             player.Set(new Transform(new Vector2(1,1), 0));
             player.Set(new Controller(Vector2.Zero, 3, false));
-            var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic);
+            var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic, VelcroPhysics.Collision.Filtering.Category.Cat9);
             player.Set(physicBody);
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
             player.Set(new RocketFire());
-            player.Set(new Trail(8, 90, physicWorld, physicBody.Body));
+            player.Set(new Trail(30, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
             
             var player1 = GabiacSettings.world.CreateEntity();
             player1.Set(new Transform(new Vector2(1,1), 0));

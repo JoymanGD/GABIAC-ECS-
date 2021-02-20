@@ -1,3 +1,4 @@
+using MonoGame.Extended;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using DefaultEcs;
@@ -5,6 +6,7 @@ using DefaultEcs.System;
 using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Components;
 using FontStashSharp;
+using VelcroPhysics.Utilities;
 using System.IO;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,6 +14,8 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Transform))]
     [With(typeof(Player))]
+    [With(typeof(PhysicBody))]
+    [With(typeof(Controller))]
     public partial class DebugSystem : AEntitySetSystem<float>
     {
         private SpriteBatch spriteBatch;
@@ -34,7 +38,9 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(float _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(ref Transform _transform, float elapsedTime){
+        private void Update(in Transform _transform, in PhysicBody _physicBody, in Controller _controller, float elapsedTime){
+            var linearVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
+            var angularVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.AngularVelocity);
             spriteBatch.DrawString(font, 
                                         
                                         "FPS: " + 1/(elapsedTime/100) + 
@@ -43,9 +49,20 @@ namespace Gabiac.Scripts.ECS.Systems
                                         "\n" +
                                         "Position: " + _transform.Position.ToString() + 
                                         "\n" +
+                                        "Angular velocity: " + angularVelocity + 
+                                        "\n" +
+                                        "Linear velocity: " + linearVelocity + 
+                                        "\n" +
+                                        "Inertia: " + ConvertUnits.ToDisplayUnits(_physicBody.Body.Inertia) + 
+                                        "\n" +
                                         "MousePos: " + Mouse.GetState().Position.ToString()
 
             , new Vector2(40, 40), Color.White);
+
+            linearVelocity.Normalize();
+
+            spriteBatch.DrawLine(_transform.Position, _transform.Position + linearVelocity * 80, Color.Red, 2);
+            spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.LookDirection * 80, Color.Green, 2);
         }
 
         protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);
