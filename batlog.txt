@@ -11,3 +11,6 @@
  12 files changed, 67 insertions(+), 49 deletions(-)
  delete mode 100644 Scripts/ECS/Components/TrailPoint.cs
  
+[DefaultECS bdc3244] Scheduled commit 20.02.2021 19:00:00,44
+ 9 files changed, 104 insertions(+), 24 deletions(-)
+ 
