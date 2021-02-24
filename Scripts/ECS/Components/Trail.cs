@@ -35,18 +35,6 @@ namespace Gabiac.Scripts.ECS.Components
                 body.Mass = _car.Mass / 100;
                 Pool.AddLast(body);
             }
-            var first = Pool.Last;
-            var firstBody = first.Value;
-            firstBody.Position = Car.Position + ConvertUnits.ToSimUnits(new Vector2(5,5));
-            firstBody.Enabled = true;
-            var anchor = Vector2.Lerp(Car.Position, firstBody.Position, .5f);
-            var rj = new RopeJoint(Car, firstBody, anchor, anchor);
-            var sj = new WeldJoint(Car, firstBody, anchor, anchor);
-            var jj = new FixedMouseJoint(firstBody, Vector2.Zero);
-            rj.MaxLength = ConvertUnits.ToSimUnits(_pointsDistance);
-            _physicWorld.AddJoint(rj);
-            Pool.RemoveLast();
-            TrailPoints.AddFirst(first);
         }
     }
 }

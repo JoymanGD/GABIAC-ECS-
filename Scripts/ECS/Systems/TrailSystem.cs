@@ -15,6 +15,7 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(Transform))]
     [With(typeof(Controller))]
     [With(typeof(PhysicBody))]
+    [With(typeof(DoTheTrail))]
     public partial class TrailSystem : AEntitySetSystem<float>
     {
         private SpriteBatch spriteBatch;
@@ -34,28 +35,16 @@ namespace Gabiac.Scripts.ECS.Systems
         [Update]
         private void Update(in Transform _transform, ref Trail _trail, in Controller _controller, in PhysicBody _physicBody){
             //logic
-            //int currentTrailLength = Math.Clamp((int)(_transform.DeltaPosition*2), 0, _trail.MaxPointsCount);
+            if(_trail.TrailPoints.Count == 0)
+                AddTrailPointNew(_trail);
+            
             float distance = ConvertUnits.ToDisplayUnits(_physicBody.Body.Position - _trail.TrailPoints.First.Value.Position).Length();
             if(distance > _trail.PointsDistance){
-                //AddTrailPointNew(_trail);
-            }
-            // if(_trail.TrailPoints.Count < currentTrailLength){
-            //     AddTrailPoint(_trail, _controller.MovementDirection);
-            // }
-            // else if(_trail.TrailPoints.Count > currentTrailLength){
-            //     //RemoveTrailPoint(_trail);
-            // }
-
-
-            //debug draw
-            foreach (var trailPoint in _trail.TrailPoints)
-            {
-                spriteBatch.DrawCircle(ConvertUnits.ToDisplayUnits(trailPoint.Position), 20, 32, Color.Green);
+                AddTrailPointNew(_trail);
             }
 
-            foreach (var j in physicWorld.JointList)
-            {
-                spriteBatch.DrawLine(ConvertUnits.ToDisplayUnits(j.BodyA.Position), ConvertUnits.ToDisplayUnits(j.BodyB.Position), Color.Yellow, 1);
+            if(distance < _trail.PointsDistance){
+                RemoveTrailPointNew(_trail);
             }
         }
         private void AddTrailPointNew(Trail _trail){
@@ -65,15 +54,14 @@ namespace Gabiac.Scripts.ECS.Systems
             if(_pool.Count > 0){
                 var lastPoolNode = _pool.Last;
 
-                var newPoint = lastPoolNode.Value;
-                var prevPoint = _list.First.Value;
-                var car = _trail.Car;
-
+                // var newPoint = lastPoolNode.Value;
+                // var prevPoint = _list.First.Value;
+                // var car = _trail.Car;
                 
                 // var body = lastPoolNode.Value;
                 // Body lastPoint;
 
-                // //setting new node
+                //setting new node
                 // if(_list.Count == 0){
                 //     lastPoint = _trail.Car;
                 // }
@@ -81,11 +69,11 @@ namespace Gabiac.Scripts.ECS.Systems
                 //     lastPoint = _list.Last.Value;
                 // }
 
-                // //pooling
-                // _pool.RemoveLast();
-                // _list.AddLast(lastPoolNode);
+                //pooling
+                _pool.RemoveLast();
+                _list.AddFirst(lastPoolNode);
 
-                // //creating joint
+                //creating joint
                 // var anchor = Vector2.Lerp(lastPoint.Position, body.Position, .5f);
                 // var joint = new RopeJoint(lastPoint, body, anchor, anchor);
                 // physicWorld.AddJoint(joint);
@@ -113,7 +101,6 @@ namespace Gabiac.Scripts.ECS.Systems
                 _pool.RemoveLast();
                 _list.AddLast(lastPoolNode);
                 
-
                 body.Position = lastPoint.Position + ConvertUnits.ToSimUnits(_direction * _trail.PointsDistance);
                 body.Enabled = true;
 
@@ -121,6 +108,24 @@ namespace Gabiac.Scripts.ECS.Systems
                 var anchor = Vector2.Lerp(lastPoint.Position, body.Position, .5f);
                 var joint = new RopeJoint(lastPoint, body, anchor, anchor);
                 physicWorld.AddJoint(joint);
+            }
+        }
+
+        private void RemoveTrailPointNew(Trail _trail){
+            var _pool = _trail.Pool;
+            var _list = _trail.TrailPoints;
+            if(_pool.Count < _trail.MaxPointsCount){
+                var lastListNode = _list.Last;
+                var body = lastListNode.Value;
+
+                body.Enabled = false;
+
+                //removing joint
+                //physicWorld.RemoveJoint(body.JointList.Joint);
+
+                //pooling
+                _list.RemoveLast();
+                _pool.AddLast(lastListNode);
             }
         }
 

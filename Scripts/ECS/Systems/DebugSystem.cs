@@ -24,12 +24,14 @@ namespace Gabiac.Scripts.ECS.Systems
         private FontSystem fontSystem;
         private SpriteFontBase font;
         private GraphicsDeviceManager graphics;
+        private VelcroPhysics.Dynamics.World physicWorld;
         
-        public DebugSystem(GraphicsDeviceManager _graphics, SpriteBatch _spriteBatch, World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
+        public DebugSystem(GraphicsDeviceManager _graphics, SpriteBatch _spriteBatch, World _world, VelcroPhysics.Dynamics.World _physicWorld, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
             graphics = _graphics;
             spriteBatch = _spriteBatch;
             runner = _runner;
             world = _world;
+            physicWorld = _physicWorld;
             fontSystem = new FontSystem(graphics.GraphicsDevice, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             fontSystem.AddFont(File.ReadAllBytes(@"Content/Fonts/NotoSansJP-Light.otf"));
             font = fontSystem.GetFont(30);
@@ -38,7 +40,7 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(float _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(in Transform _transform, in PhysicBody _physicBody, in Controller _controller, float elapsedTime){
+        private void Update(in Transform _transform, in PhysicBody _physicBody, in Controller _controller, in Trail _trail, float elapsedTime){
             var linearVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
             var angularVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.AngularVelocity);
             spriteBatch.DrawString(font, 
@@ -60,9 +62,22 @@ namespace Gabiac.Scripts.ECS.Systems
             , new Vector2(40, 40), Color.White);
 
             linearVelocity.Normalize();
+            
+            //trail points
+            foreach (var trailPoint in _trail.TrailPoints)
+            {
+                spriteBatch.DrawCircle(ConvertUnits.ToDisplayUnits(trailPoint.Position), 20, 32, Color.Green);
+            }
 
-            spriteBatch.DrawLine(_transform.Position, _transform.Position + linearVelocity * 80, Color.Red, 2);
-            spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.LookDirection * 80, Color.Green, 2);
+            //joints
+            foreach (var j in physicWorld.JointList)
+            {
+                spriteBatch.DrawLine(ConvertUnits.ToDisplayUnits(j.BodyA.Position), ConvertUnits.ToDisplayUnits(j.BodyB.Position), Color.Yellow, 1);
+            }
+            
+            //directions
+            spriteBatch.DrawLine(_transform.Position, _transform.Position + linearVelocity * 80, Color.Red, 2); //physic force
+            spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.LookDirection * 80, Color.Green, 2); //mouse direction
         }
 
         protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);
