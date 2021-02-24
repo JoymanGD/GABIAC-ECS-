@@ -1,5 +1,8 @@
+using System;
+using VelcroPhysics.Collision.ContactSystem;
 using VelcroPhysics.Factories;
 using VelcroPhysics.Dynamics;
+using VelcroPhysics.Collision.Shapes;
 using VelcroPhysics.Dynamics.Joints;
 using System.Collections.Generic;
 using VelcroPhysics.Collision.Filtering;
@@ -25,16 +28,21 @@ namespace Gabiac.Scripts.ECS.Components
             for (var i = 0; i < MaxPointsCount; i++)
             {
                 //var body = BodyFactory.CreateBody(_physicWorld, default, default, BodyType.Dynamic);
-                var body = BodyFactory.CreateCircle(_physicWorld, ConvertUnits.ToSimUnits(20), 0, default, BodyType.Dynamic);
+                var circleRadius = ConvertUnits.ToSimUnits(20);
+                var body = BodyFactory.CreateCircle(_physicWorld, circleRadius, 0, default, BodyType.Kinematic);
                 body.AngularDamping = .03f;
                 body.LinearDamping = 1f;
                 body.SleepingAllowed = true;
-
-                //body.FixedRotation = true;
+                body.OnSeparation += DisableBody;
+                body.IsSensor = true;
                 body.Enabled = false;
                 body.Mass = _car.Mass / 100;
                 Pool.AddLast(body);
             }
+        }
+
+        public void DisableBody(Fixture _fixtureA, Fixture _fixtureB, Contact _contact){
+            _fixtureA.IsSensor = false;
         }
     }
 }

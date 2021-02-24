@@ -1,5 +1,5 @@
-using System.Runtime.CompilerServices;
 using VelcroPhysics.Dynamics;
+using VelcroPhysics.Collision.Shapes;
 using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using VelcroPhysics.Factories;
@@ -19,7 +19,6 @@ namespace Gabiac.Scripts.ECS.Components
             Body = BodyFactory.CreateRectangle(_world, _scale.X, _scale.Y, 1, _position, _rotation, _bodyType);
             Body.AngularDamping = .03f;
             Body.LinearDamping = 1f;
-            
             Body.CollidesWith = _category;
             Body.SleepingAllowed = true;
             Body.FixedRotation = true;

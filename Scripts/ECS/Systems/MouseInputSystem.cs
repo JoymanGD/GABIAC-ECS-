@@ -15,7 +15,7 @@ namespace Gabiac.Scripts.ECS.Systems
         private IParallelRunner runner;
         private World world;
         
-        public MouseInputSystem(World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
+        public MouseInputSystem(World _world, IParallelRunner _runner) : base(_world, _runner){
             world = _world;
             runner = _runner;
             

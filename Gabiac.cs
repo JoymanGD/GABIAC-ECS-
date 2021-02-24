@@ -79,7 +79,7 @@ namespace Gabiac
 
             player.Set(new Transform(new Vector2(1,1), 0));
             player.Set(new Controller(Vector2.Zero, 3, false));
-            var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic, VelcroPhysics.Collision.Filtering.Category.Cat9);
+            var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic);
             player.Set(physicBody);
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
