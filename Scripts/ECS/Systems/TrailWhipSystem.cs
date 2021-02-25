@@ -49,8 +49,9 @@ namespace Gabiac.Scripts.ECS.Systems
                 if(prevNode == null) prevNode = new LinkedListNode<Body>(_physicBody.Body);
 
                 var anchor = Vector2.Lerp(currentNode.Value.Position, prevNode.Value.Position, .5f);
-                var rj = new RopeJoint(prevNode.Value, currentNode.Value, anchor, anchor);
+                var rj = new DistanceJoint(prevNode.Value, currentNode.Value, anchor, anchor);
                 physicWorld.AddJoint(rj);
+                currentNode.Value.Mass = .001f;
                 currentNode = currentNode.Next;
             }
 
