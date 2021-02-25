@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using DefaultEcs.System;
 using Gabiac.Scripts.ECS.Systems;
+using Gabiac.Scripts.ECS.Systems.Input;
 using Gabiac.Scripts.Managers;
 using Gabiac.Scripts.Helpers;
 
@@ -37,6 +38,8 @@ namespace Gabiac.Scripts.Scenes
 
             updateSystems = new SequentialSystem<float>(
                 new MouseInputSystem(world, mainRunner),
+                new KeyboardInputSystem(world, mainRunner),
+                new RotationSystem(world, mainRunner),
                 new MovementSystem(world, mainRunner),
                 new PhysicsSystem(world, mainRunner, physicWorld)
             );

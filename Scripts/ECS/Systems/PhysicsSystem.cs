@@ -28,7 +28,6 @@ namespace Gabiac.Scripts.ECS.Systems
             _transform.SetPosition(_physicBody.Position());
             _transform.SetRotation(_physicBody.Rotation());
             _transform.SetDeltaPosition();
-            _transform.SetDeltaRotation();
         }
     }
 }

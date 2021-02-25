@@ -77,7 +77,7 @@ namespace Gabiac.Scripts.ECS.Systems
             
             //directions
             spriteBatch.DrawLine(_transform.Position, _transform.Position + linearVelocity * 80, Color.Red, 2); //physic force
-            spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.LookDirection * 80, Color.Green, 2); //mouse direction
+            spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.Direction * 80, Color.Green, 2); //mouse direction
         }
 
         protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);

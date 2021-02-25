@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using System.Linq;
 
-namespace Scripts.Enums
+namespace Gabiac.Scripts.Enums
 {
     public static class Directions
     {
