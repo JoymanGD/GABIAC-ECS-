@@ -76,22 +76,28 @@ namespace Gabiac
             var texture = Texture2D.FromFile(GabiacSettings.graphics.GraphicsDevice, "Content/Car.png");
             var physicWorld = GabiacSettings.physicWorld;
 
-            player.Set(new Transform(new Vector2(1,1), 0));
-            player.Set(new Controller(Vector2.Zero, 3, false));
-            var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic);
+            player.Set(new Transform(0));
+            player.Set(new Controller(Vector2.Zero, 5, false));
+            var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), texture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic);
             player.Set(physicBody);
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
             player.Set(new RocketFire());
             player.Set(new RotatePlayer());
-            //player.Set(new MouseInput());
-            player.Set(new KeyboardInput());
             player.Set(new Trail(10, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
             
             var player1 = GabiacSettings.world.CreateEntity();
-            player1.Set(new Transform(new Vector2(1,1), 0));
-            player1.Set(new PhysicBody(physicWorld, new Vector2(400,400), new Vector2(texture.Width, texture.Height), 0, VelcroPhysics.Dynamics.BodyType.Dynamic));
+            player1.Set(new Transform(0));
+            player1.Set(new PhysicBody(physicWorld, new Vector2(400,400), texture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic));
             player1.Set(new Renderer(texture, Color.Red));
+
+            var ball = GabiacSettings.world.CreateEntity();
+            var ballTexture = Texture2D.FromFile(GabiacSettings.graphics.GraphicsDevice, "Content/Ball.png");
+            var ballTransform = new Transform(0);
+            ball.Set(ballTransform);
+            ball.Set(new Renderer(ballTexture, Color.White));
+            var ballBody = new PhysicBody(physicWorld, new Vector2(700,700), ballTexture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic, _mass:.0001f);
+            ball.Set(ballBody);
         }
 
 #endregion

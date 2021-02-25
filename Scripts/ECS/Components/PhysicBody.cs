@@ -24,6 +24,20 @@ namespace Gabiac.Scripts.ECS.Components
             Body.FixedRotation = true;
         }
 
+        public PhysicBody(World _world, Vector2 _position, float _radius, BodyType _bodyType, Category _category = Category.All, float _mass = 0){
+            _radius = ConvertUnits.ToSimUnits(_radius);
+            _position = ConvertUnits.ToSimUnits(_position);
+            
+            Body = BodyFactory.CreateCircle(_world, _radius, 0, _position, _bodyType);
+            Body.AngularDamping = .03f;
+            Body.LinearDamping = 1f;
+            Body.CollidesWith = _category;
+            Body.SleepingAllowed = true;
+            Body.FixedRotation = true;
+            if(_mass > 0)
+                Body.Mass = _mass;
+        }
+
         public void SetBody(Body _body){
             Body = _body;
         }
@@ -52,15 +66,6 @@ namespace Gabiac.Scripts.ECS.Components
             else
                 _rotation = Body.Rotation;
             return _rotation;
-        }
-
-        public float AngularVelocity(bool UnSim = true){
-            float _angularVelocity;
-            if(UnSim)
-                _angularVelocity = ConvertUnits.ToDisplayUnits(Body.AngularVelocity);
-            else
-                _angularVelocity = Body.AngularVelocity;
-            return _angularVelocity;
         }
     }
 }

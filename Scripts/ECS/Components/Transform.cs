@@ -10,9 +10,9 @@ namespace Gabiac.Scripts.ECS.Components
         public float DeltaPosition {get; private set;}
         private Vector2 lastPos;
 
-        public Transform(Vector2 _scale, float _rotation){
+        public Transform(float _rotation){
             Position = Vector2.Zero;
-            Scale = _scale;
+            Scale = Vector2.One;
             Rotation = _rotation;
             lastPos = Position;
             DeltaPosition = 0;

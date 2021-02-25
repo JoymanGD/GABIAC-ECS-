@@ -16,7 +16,6 @@ namespace Gabiac.Scripts.ECS.Systems
     {
         World world;
         Inputs currentInput = Inputs.Keyboard;
-
         MouseStateExtended mouseState;
         KeyboardStateExtended keyboardState;
         TouchCollection touchState;
@@ -77,14 +76,6 @@ namespace Gabiac.Scripts.ECS.Systems
                         _entity.Remove<DoTheTrail>();
                     }
 
-                    if(mouseState.WasButtonJustDown(MouseButton.XButton1) && _entity.Get<Trail>().TrailPoints.Count > 7){
-                        _entity.Set<TrailWhip>();
-                    }
-                    else if(mouseState.WasButtonJustUp(MouseButton.XButton1) && _entity.Has<TrailWhip>()){
-                        _entity.Remove<TrailWhip>();
-                        _entity.Get<Trail>().Whipped = false;
-                    }
-
                     break;
                 case Inputs.Keyboard:
 
@@ -120,11 +111,13 @@ namespace Gabiac.Scripts.ECS.Systems
                 if(currentInput!=Inputs.Mouse)
                     currentInput = Inputs.Mouse;
             }
-            else if(keyboardState.GetPressedKeys().Length > 0){
+
+            if(keyboardState.GetPressedKeys().Length > 0 || keyboardState.WasAnyKeyJustDown()){
                 if(currentInput!=Inputs.Keyboard)
                     currentInput = Inputs.Keyboard;
             }
-            else if(touchState.Count > 0){
+            
+            if(touchState.Count > 0){
                 if(currentInput!=Inputs.Touch)
                     currentInput = Inputs.Touch;
             }
