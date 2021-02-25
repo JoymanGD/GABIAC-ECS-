@@ -18,6 +18,7 @@ namespace Gabiac.Scripts.ECS.Components
         public LinkedList<Body> TrailPoints;
         public LinkedList<Body> Pool;
         public Body Car;
+        public bool Whipped;
 
         public Trail(int _maxPointsCount, float _pointsDistance, World _physicWorld, Body _car, Category _category = Category.None){
             Car = _car;
@@ -25,6 +26,7 @@ namespace Gabiac.Scripts.ECS.Components
             PointsDistance = _pointsDistance;
             TrailPoints = new LinkedList<Body>();
             Pool = new LinkedList<Body>();
+            Whipped = false;
             for (var i = 0; i < MaxPointsCount; i++)
             {
                 //var body = BodyFactory.CreateBody(_physicWorld, default, default, BodyType.Dynamic);

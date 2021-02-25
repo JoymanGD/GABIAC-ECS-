@@ -28,3 +28,20 @@
  create mode 100644 Scripts/ECS/Components/DoTheTrail.cs
  create mode 100644 Scripts/Enums/Directions.cs
  
+[DefaultECS 66677bd] Scheduled commit 25.02.2021 19:00:02,75
+ 34 files changed, 279 insertions(+), 153 deletions(-)
+ create mode 100644 Scripts/ECS/Components/KeyboardInput.cs
+ create mode 100644 Scripts/ECS/Components/MouseInput.cs
+ create mode 100644 Scripts/ECS/Components/MovePlayer.cs
+ create mode 100644 Scripts/ECS/Components/RotatePlayer.cs
+ create mode 100644 Scripts/ECS/Systems/Input/IInputSystem.cs
+ create mode 100644 Scripts/ECS/Systems/Input/KeyboardInputSystem.cs
+ create mode 100644 Scripts/ECS/Systems/Input/MouseInputSystem.cs
+ delete mode 100644 Scripts/ECS/Systems/MouseInputSystem.cs
+ create mode 100644 Scripts/ECS/Systems/RotationSystem.cs
+ rewrite bin/Debug/netcoreapp3.1/Toil.pdb (63%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.assets.cache (81%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.csprojAssemblyReference.cache (90%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.pdb (63%)
+ rewrite obj/project.nuget.cache (96%)
+ 

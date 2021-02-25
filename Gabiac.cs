@@ -84,7 +84,7 @@ namespace Gabiac
             player.Set(new Player());
             player.Set(new RocketFire());
             player.Set(new RotatePlayer());
-            player.Set(new MouseInput());
+            //player.Set(new MouseInput());
             player.Set(new KeyboardInput());
             player.Set(new Trail(10, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
             
