@@ -578,35 +578,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\UserName\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\UserName\\Desktop\\Gabiac\\Toil.csproj",
+      "projectUniqueName": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\Toil.csproj",
       "projectName": "Toil",
-      "projectPath": "C:\\Users\\UserName\\Desktop\\Gabiac\\Toil.csproj",
-      "packagesPath": "C:\\Users\\UserName\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\UserName\\Desktop\\Gabiac\\obj\\",
+      "projectPath": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\Toil.csproj",
+      "packagesPath": "C:\\Users\\v.kruglyakov\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\UserName\\Desktop\\Gabiac\\NuGet.Config",
-        "C:\\Users\\UserName\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\NuGet.Config",
+        "C:\\Users\\v.kruglyakov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\UserName\\Desktop\\Gabiac\\References": {},
+        "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\References": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

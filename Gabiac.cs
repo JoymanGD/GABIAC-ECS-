@@ -98,6 +98,7 @@ namespace Gabiac
             ball.Set(new Renderer(ballTexture, Color.White));
             var ballBody = new PhysicBody(physicWorld, new Vector2(700,700), ballTexture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic, _mass:.0001f);
             ball.Set(ballBody);
+            ball.Set(new Ball(ballBody));
         }
 
 #endregion
