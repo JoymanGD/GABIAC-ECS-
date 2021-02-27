@@ -45,3 +45,11 @@
  rewrite obj/Debug/netcoreapp3.1/Toil.pdb (63%)
  rewrite obj/project.nuget.cache (96%)
  
+[DefaultECS c01e277] Scheduled commit 26.02.2021 19:00:01,08
+ 18 files changed, 109 insertions(+), 72 deletions(-)
+ create mode 100644 Scripts/ECS/Components/Ball.cs
+ create mode 100644 Scripts/ECS/Systems/BallSystem.cs
+ rewrite obj/Debug/netcoreapp3.1/Toil.assets.cache (81%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.csprojAssemblyReference.cache (87%)
+ rewrite obj/project.nuget.cache (96%)
+ 
