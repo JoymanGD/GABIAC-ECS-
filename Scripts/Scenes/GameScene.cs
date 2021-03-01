@@ -39,7 +39,9 @@ namespace Gabiac.Scripts.Scenes
                 new InputSystem(world),
                 new RotationSystem(world, mainRunner),
                 new MovementSystem(world, mainRunner),
-                new PhysicsSystem(world, mainRunner, physicWorld)
+                new PhysicsSystem(world, mainRunner, physicWorld),
+                new BallSystem(world),
+                new BallReflectionSystem(world)
             );
 
             drawSystems = new SequentialSystem<float>(

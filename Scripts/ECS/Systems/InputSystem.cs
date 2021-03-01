@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using DefaultEcs;
 using DefaultEcs.System;
-using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Components;
 using MonoGame.Extended.Input;
 using Microsoft.Xna.Framework.Input.Touch;

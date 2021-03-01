@@ -6,6 +6,8 @@ using Gabiac.Scripts.Scenes;
 using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Components;
 using Gabiac.Scripts.Helpers;
+using VelcroPhysics.Collision.ContactSystem;
+using VelcroPhysics.Shared.Optimization;
 
 namespace Gabiac
 {
@@ -97,8 +99,15 @@ namespace Gabiac
             ball.Set(ballTransform);
             ball.Set(new Renderer(ballTexture, Color.White));
             var ballBody = new PhysicBody(physicWorld, new Vector2(700,700), ballTexture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic, _mass:.0001f);
+            var ballComp = new Ball(Vector2.Zero, .02f);
+            ballBody.Body.OnCollision += (fixtA, fixtB, contact)=>{
+                Vector2 norm;
+                FixedArray2<Vector2> points;
+                contact.GetWorldManifold(out norm, out points);
+                ball.Set(new BallReflection(norm));
+            };
             ball.Set(ballBody);
-            ball.Set(new Ball(ballBody));
+            ball.Set(ballComp);
         }
 
 #endregion
