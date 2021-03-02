@@ -1,11 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "dfLAgwfs/op2qyeD4HGUvaPYrgG6GQwOJlRxvQTCIg5s5E/wAr/TnunE8TPONwquWdCHBJHieElX/qWkGnPxGw==",
+  "dgSpecHash": "QO0rkzGYmwlyj3wgAjRpT0EhdQfRSx4MsObvpPbpYDDVtdmP4o0Y3qOehVfGOUm+qC9VdHIF/cT0v3GdX65ivA==",
   "success": true,
   "projectFilePath": "C:\\Users\\v.kruglyakov\\Desktop\\Projects\\Gabiac\\Toil.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\apos.gui\\1.0.2-alpha\\apos.gui.1.0.2-alpha.nupkg.sha512",
-    "C:\\Users\\v.kruglyakov\\.nuget\\packages\\apos.input\\2.3.1\\apos.input.2.3.1.nupkg.sha512",
     "C:\\Users\\v.kruglyakov\\.nuget\\packages\\assetmanagementbase\\0.5.2\\assetmanagementbase.0.5.2.nupkg.sha512",
     "C:\\Users\\v.kruglyakov\\.nuget\\packages\\cyotek.drawing.bitmapfont\\2.0.1\\cyotek.drawing.bitmapfont.2.0.1.nupkg.sha512",
     "C:\\Users\\v.kruglyakov\\.nuget\\packages\\defaultecs.analyzer\\0.15.0\\defaultecs.analyzer.0.15.0.nupkg.sha512",

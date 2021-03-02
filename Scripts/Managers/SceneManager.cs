@@ -8,7 +8,7 @@ namespace Gabiac.Scripts.Managers
 {
     public static class SceneManager {
         private static List<IScene> scenes = new List<IScene>();
-        public static IScene currentScene { get; private set;}
+        public static IScene currentScene { get; private set; }
 
         public static void Draw(GameTime gameTime){
             currentScene.Draw(gameTime);

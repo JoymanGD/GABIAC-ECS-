@@ -1,3 +1,4 @@
+using DefaultEcs;
 using Microsoft.Xna.Framework;
 using FontStashSharp;
 using System.IO;
@@ -6,26 +7,15 @@ using Myra;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D;
 using Gabiac.Scripts.Helpers;
+using DefaultEcs.System;
+using Gabiac.Scripts.ECS.Components.UI;
+using Gabiac.Scripts.ECS.Systems;
 
 namespace Gabiac.Scripts.Scenes
 {
     public class MenuScene : IScene
     {
-
-#region ECS
-        private Desktop desktop;
-
-#endregion
-
-        public override void Update(GameTime _gameTime){
-        }
-
         public override void Draw(GameTime _gameTime){
-            desktop.Render();
-        }
-
-        public override void PreLoad(){
-
         }
 
         public override void Load(){
@@ -68,16 +58,23 @@ namespace Gabiac.Scripts.Scenes
             grid.Widgets.Add(button);
 
             // Add it to the desktop
-            desktop = new Desktop();
-            desktop.Root = grid;
+            base.Load();
         }
 
-        public override void PostLoad(){
-
+        public override void SetEntities(){
+            
         }
 
-        public override void Unload(){
+        public override void SetSystems(){
+            var world = GabiacSettings.world;
 
+            UpdateSystems = new SequentialSystem<float>(
+                
+            );
+
+            DrawSystems = new SequentialSystem<float>(
+                
+            );
         }
     }
 }

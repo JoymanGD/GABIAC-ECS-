@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using DefaultEcs;
 using DefaultEcs.System;
 using Gabiac.Scripts.ECS.Components;
+using Gabiac.Scripts.ECS.Components.UI;
 using MonoGame.Extended.Input;
+using MonoGame.Extended.Input.InputListeners;
 using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Gabiac.Scripts.ECS.Systems
@@ -18,6 +20,7 @@ namespace Gabiac.Scripts.ECS.Systems
         MouseStateExtended mouseState;
         KeyboardStateExtended keyboardState;
         TouchCollection touchState;
+        int test = 0;
 
         public InputSystem(World _world) : base(_world){
             world = _world;
