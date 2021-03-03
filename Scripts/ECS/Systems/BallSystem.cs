@@ -3,13 +3,14 @@ using DefaultEcs.System;
 using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Components;
 using VelcroPhysics.Utilities;
+using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Ball))]
     [With(typeof(PhysicBody))]
     
-    public partial class BallSystem : AEntitySetSystem<float>
+    public partial class BallSystem : AEntitySetSystem<GameTime>
     {
         private World world;
         

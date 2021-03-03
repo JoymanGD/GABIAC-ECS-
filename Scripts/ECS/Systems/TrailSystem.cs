@@ -16,7 +16,7 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(Controller))]
     [With(typeof(PhysicBody))]
     [With(typeof(DoTheTrail))]
-    public partial class TrailSystem : AEntitySetSystem<float>
+    public partial class TrailSystem : AEntitySetSystem<GameTime>
     {
         private SpriteBatch spriteBatch;
         private IParallelRunner runner;
@@ -30,7 +30,7 @@ namespace Gabiac.Scripts.ECS.Systems
             physicWorld = _physicWorld;
         }
 
-        protected override void PreUpdate(float _state) => spriteBatch.Begin();
+        protected override void PreUpdate(GameTime _state) => spriteBatch.Begin();
 
         [Update]
         private void Update(in Transform _transform, ref Trail _trail, in Controller _controller, in PhysicBody _physicBody){
@@ -84,6 +84,6 @@ namespace Gabiac.Scripts.ECS.Systems
             }
         }
 
-        protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);
+        protected override void PostUpdate(GameTime _state) => world.Optimize(runner, spriteBatch.End);
     }
 }

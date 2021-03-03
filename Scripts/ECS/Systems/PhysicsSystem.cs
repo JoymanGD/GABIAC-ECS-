@@ -3,12 +3,13 @@ using DefaultEcs.System;
 using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Components;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Transform))]
     [With(typeof(PhysicBody))]
-    public partial class PhysicsSystem : AEntitySetSystem<float>
+    public partial class PhysicsSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
         private World world;
@@ -22,7 +23,8 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref Transform _transform, in PhysicBody _physicBody, float elapsedTime){
+        private void Update(ref Transform _transform, in PhysicBody _physicBody, GameTime _gameTime){
+            var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
             float step = Math.Min(elapsedTime * stepRatio, fixedStepRatio);
             physicWorld.Step(step);
             _transform.SetPosition(_physicBody.Position());

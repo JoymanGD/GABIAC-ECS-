@@ -71,3 +71,23 @@
  rewrite obj/Debug/netcoreapp3.1/Toil.assets.cache (94%)
  rewrite obj/Debug/netcoreapp3.1/Toil.csprojAssemblyReference.cache (97%)
  
+[DefaultECS 9958b54] Scheduled commit 02.03.2021 19:00:00,85
+ 33 files changed, 289 insertions(+), 220 deletions(-)
+ create mode 100644 Scripts/ECS/Components/Input/GamepadEvent.cs
+ create mode 100644 Scripts/ECS/Components/Input/KeyboardEvent.cs
+ create mode 100644 Scripts/ECS/Components/Input/MouseEvent.cs
+ create mode 100644 Scripts/ECS/Components/Input/TouchEvent.cs
+ create mode 100644 Scripts/ECS/Components/InputHandler.cs
+ create mode 100644 Scripts/ECS/Components/Test.cs
+ delete mode 100644 Scripts/ECS/Components/UI/Button.cs
+ create mode 100644 Scripts/ECS/Components/UI/ITextable.cs
+ create mode 100644 Scripts/ECS/Components/UI/IUIElement.cs
+ delete mode 100644 Scripts/ECS/Components/UI/UIElement.cs
+ create mode 100644 Scripts/ECS/Systems/InputEventSystem.cs
+ create mode 100644 Scripts/ECS/Systems/InputHandlerCreatingSystem.cs
+ create mode 100644 Scripts/ECS/Systems/TestSystem.cs
+ delete mode 100644 Scripts/ECS/Systems/UISystem.cs
+ rewrite Scripts/Scenes/IScene.cs (64%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.assets.cache (95%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.csprojAssemblyReference.cache (73%)
+ 

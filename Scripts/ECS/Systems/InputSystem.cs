@@ -13,7 +13,7 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Controller))]
     [With(typeof(PhysicBody))]
-    public partial class InputSystem : AEntitySetSystem<float>
+    public partial class InputSystem : AEntitySetSystem<GameTime>
     {
         World world;
         Inputs currentInput = Inputs.Keyboard;
@@ -107,7 +107,7 @@ namespace Gabiac.Scripts.ECS.Systems
         void CheckForActiveInput(){
             mouseState = MouseExtended.GetState();
             keyboardState = KeyboardExtended.GetState();
-            touchState = TouchPanel.GetState();
+            touchState = TouchPanel.GetState(); 
 
             if(mouseState.PositionChanged || mouseState.WasButtonJustDown(MouseButton.Left) || mouseState.WasButtonJustDown(MouseButton.Right)){
                 if(currentInput!=Inputs.Mouse)

@@ -10,7 +10,7 @@ namespace Gabiac.Scripts.ECS.Systems
     [WhenAdded(typeof(BallReflection))]
     [With(typeof(PhysicBody))]
     
-    public partial class BallReflectionSystem : AEntitySetSystem<float>
+    public partial class BallReflectionSystem : AEntitySetSystem<GameTime>
     {
         private World world;
         

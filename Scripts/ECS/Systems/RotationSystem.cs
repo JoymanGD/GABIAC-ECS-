@@ -10,7 +10,7 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
     [With(typeof(RotatePlayer))]
-    public partial class RotationSystem : AEntitySetSystem<float>
+    public partial class RotationSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
         private World world;

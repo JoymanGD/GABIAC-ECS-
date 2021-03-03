@@ -21,6 +21,7 @@ namespace Gabiac.Scripts.Scenes
             player.Set(physicBody);
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
+            player.Set(new InputHandler());
             player.Set(new RocketFire());
             player.Set(new RotatePlayer());
             player.Set(new Trail(10, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
@@ -56,16 +57,19 @@ namespace Gabiac.Scripts.Scenes
             var mainRunner = GabiacSettings.mainRunner;
             var physicWorld = GabiacSettings.physicWorld;
 
-            UpdateSystems = new SequentialSystem<float>(
+            UpdateSystems = new SequentialSystem<GameTime>(
                 new InputSystem(world),
                 new RotationSystem(world, mainRunner),
                 new MovementSystem(world, mainRunner),
                 new PhysicsSystem(world, mainRunner, physicWorld),
                 new BallSystem(world),
-                new BallReflectionSystem(world)
+                new BallReflectionSystem(world),
+                new InputHandlerCreatingSystem(world),
+                new InputEventSystem(world),
+                new InputHandlerUpdatingSystem(world)
             );
 
-            DrawSystems = new SequentialSystem<float>(
+            DrawSystems = new SequentialSystem<GameTime>(
                 new RocketFireSystem(world, spriteBatch, mainRunner),
                 new RenderSystem(spriteBatch, world, mainRunner),
                 new DebugSystem(graphics, spriteBatch, world, physicWorld, mainRunner),

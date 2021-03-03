@@ -16,7 +16,7 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(Player))]
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
-    public partial class DebugSystem : AEntitySetSystem<float>
+    public partial class DebugSystem : AEntitySetSystem<GameTime>
     {
         private SpriteBatch spriteBatch;
         private IParallelRunner runner;
@@ -37,10 +37,11 @@ namespace Gabiac.Scripts.ECS.Systems
             font = fontSystem.GetFont(30);
         }
 
-        protected override void PreUpdate(float _state) => spriteBatch.Begin();
+        protected override void PreUpdate(GameTime _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(in Transform _transform, in PhysicBody _physicBody, in Controller _controller, in Trail _trail, float elapsedTime){
+        private void Update(in Transform _transform, in PhysicBody _physicBody, in Controller _controller, in Trail _trail, GameTime _gameTime){
+            var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
             var linearVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
             var angularVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.AngularVelocity);
             spriteBatch.DrawString(font, 
@@ -80,6 +81,6 @@ namespace Gabiac.Scripts.ECS.Systems
             spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.Direction * 80, Color.Green, 2); //mouse direction
         }
 
-        protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);
+        protected override void PostUpdate(GameTime _state) => world.Optimize(runner, spriteBatch.End);
     }
 }   

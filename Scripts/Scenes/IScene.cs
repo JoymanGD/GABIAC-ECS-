@@ -14,18 +14,18 @@ namespace Gabiac.Scripts.Scenes
             }
         }
 
-        public virtual ISystem<float> UpdateSystems { get; set; }
-        public virtual ISystem<float> DrawSystems { get; set; }
+        public virtual ISystem<GameTime> UpdateSystems { get; set; }
+        public virtual ISystem<GameTime> DrawSystems { get; set; }
         public virtual void Update(GameTime _gameTime){
-            //SetEntitiesInUpdate();
-            UpdateSystems.Update((float)_gameTime.ElapsedGameTime.TotalMilliseconds);
+            SetEntitiesInUpdate();
+            UpdateSystems.Update(_gameTime);
         }
         public virtual void Draw(GameTime _gameTime){
-            DrawSystems.Update((float)_gameTime.ElapsedGameTime.TotalMilliseconds);
+            DrawSystems.Update(_gameTime);
         }
         public virtual void PreLoad(){}
         public virtual void Load(){
-            SetEntities();
+            //SetEntities();
             SetSystems();
         }
         public virtual void PostLoad(){}

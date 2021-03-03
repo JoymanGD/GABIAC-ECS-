@@ -17,7 +17,7 @@ using System;
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(RocketFire))]
-    public partial class RocketFireSystem : AEntitySetSystem<float>
+    public partial class RocketFireSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
         private World world;
@@ -64,10 +64,11 @@ namespace Gabiac.Scripts.ECS.Systems
             };
         }
 
-        protected override void PreUpdate(float _state) => spriteBatch.Begin(blendState: BlendState.AlphaBlend);
+        protected override void PreUpdate(GameTime _state) => spriteBatch.Begin(blendState: BlendState.AlphaBlend);
 
         [Update]
-        private void Update(in Renderer _renderer, in Transform _transform, float elapsedTime){
+        private void Update(in Renderer _renderer, in Transform _transform, GameTime _gameTime){
+            var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
             particleEffect.Update(elapsedTime/100);
             foreach(var emit in particleEffect.Emitters){
                 var tak = (int)_transform.DeltaPosition;
@@ -79,7 +80,7 @@ namespace Gabiac.Scripts.ECS.Systems
             spriteBatch.Draw(particleEffect);
         }
 
-        protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);
+        protected override void PostUpdate(GameTime _state) => world.Optimize(runner, spriteBatch.End);
 
         public Vector2 Rotate(float angle, Vector2 currentPos, Vector2 centre)
         {

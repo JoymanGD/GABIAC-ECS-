@@ -3,13 +3,14 @@ using DefaultEcs.System;
 using DefaultEcs.Threading;
 using Gabiac.Scripts.ECS.Components;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
     [With(typeof(MovePlayer))]
-    public partial class MovementSystem : AEntitySetSystem<float>
+    public partial class MovementSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
         private World world;

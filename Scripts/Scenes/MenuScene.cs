@@ -15,7 +15,9 @@ namespace Gabiac.Scripts.Scenes
 {
     public class MenuScene : IScene
     {
+        Desktop desktop;
         public override void Draw(GameTime _gameTime){
+            desktop.Render();
         }
 
         public override void Load(){
@@ -57,6 +59,9 @@ namespace Gabiac.Scripts.Scenes
 
             grid.Widgets.Add(button);
 
+            desktop = new Desktop();
+            desktop.Root = grid;
+
             // Add it to the desktop
             base.Load();
         }
@@ -68,11 +73,11 @@ namespace Gabiac.Scripts.Scenes
         public override void SetSystems(){
             var world = GabiacSettings.world;
 
-            UpdateSystems = new SequentialSystem<float>(
+            UpdateSystems = new SequentialSystem<GameTime>(
                 
             );
 
-            DrawSystems = new SequentialSystem<float>(
+            DrawSystems = new SequentialSystem<GameTime>(
                 
             );
         }

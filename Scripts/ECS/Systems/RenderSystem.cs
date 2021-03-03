@@ -9,7 +9,7 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Renderer))]
     [With(typeof(Transform))]
-    public partial class RenderSystem : AEntitySetSystem<float>
+    public partial class RenderSystem : AEntitySetSystem<GameTime>
     {
         private SpriteBatch spriteBatch;
         private IParallelRunner runner;
@@ -21,7 +21,7 @@ namespace Gabiac.Scripts.ECS.Systems
             world = _world;
         }
 
-        protected override void PreUpdate(float _state) => spriteBatch.Begin();
+        protected override void PreUpdate(GameTime _state) => spriteBatch.Begin();
 
         [Update]
         private void Update(in Renderer _renderer, in Transform _transform){
@@ -29,6 +29,6 @@ namespace Gabiac.Scripts.ECS.Systems
             spriteBatch.Draw(_renderer.Image, _transform.Position, null, _renderer.Color, _transform.Rotation, offset, _transform.Scale, SpriteEffects.None, 0);
         }
 
-        protected override void PostUpdate(float _state) => world.Optimize(runner, spriteBatch.End);
+        protected override void PostUpdate(GameTime _state) => world.Optimize(runner, spriteBatch.End);
     }
 }
