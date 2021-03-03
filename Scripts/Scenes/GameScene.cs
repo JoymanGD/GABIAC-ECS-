@@ -63,10 +63,7 @@ namespace Gabiac.Scripts.Scenes
                 new MovementSystem(world, mainRunner),
                 new PhysicsSystem(world, mainRunner, physicWorld),
                 new BallSystem(world),
-                new BallReflectionSystem(world),
-                new InputHandlerCreatingSystem(world),
-                new InputEventSystem(world),
-                new InputHandlerUpdatingSystem(world)
+                new BallReflectionSystem(world)
             );
 
             DrawSystems = new SequentialSystem<GameTime>(
