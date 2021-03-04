@@ -14,7 +14,7 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Controller))]
     [With(typeof(PhysicBody))]
-    public partial class InputSystem : AEntitySetSystem<GameTime>
+    public partial class InputEventWritingSystem : AEntitySetSystem<GameTime>
     {
         World world;
         Inputs currentInput = Inputs.Keyboard;
@@ -26,7 +26,7 @@ namespace Gabiac.Scripts.ECS.Systems
         GamePadListener gamePadListener;
         TouchListener touchListener;
 
-        public InputSystem(World _world) : base(_world){
+        public InputEventWritingSystem(World _world) : base(_world){
             world = _world;
             SetListeners();
             SetEvents();
@@ -41,10 +41,25 @@ namespace Gabiac.Scripts.ECS.Systems
 
         void SetEvents(){
             mouseListener.MouseDown += (sender, args)=>{
-                world.Publish((InputEvent)new MouseDownEvent(args));
+                world.Publish(new MouseDownEvent(args));
             };
             mouseListener.MouseUp += (sender, args)=>{
-                world.Publish((InputEvent)new MouseUpEvent(args));
+                world.Publish(new MouseUpEvent(args));
+            };
+            mouseListener.MouseMoved += (sender, args) => {
+                Console.WriteLine("Mouse Moved");
+            };
+            keyboardListener.KeyPressed += (sender, args)=>{
+                world.Publish(new KeyboardDownEvent(args));
+            };
+            keyboardListener.KeyReleased += (sender, args)=>{
+                world.Publish(new KeyboardUpEvent(args));
+            };
+            gamePadListener.ButtonDown += (sender, args)=>{
+                world.Publish(new GamepadDownEvent(args));
+            };
+            gamePadListener.ButtonUp += (sender, args)=>{
+                world.Publish(new GamepadUpEvent(args));
             };
         }
 
@@ -57,9 +72,9 @@ namespace Gabiac.Scripts.ECS.Systems
 
         [Update]
         protected void Update(ref Controller _controller, in PhysicBody _physicBody, in Entity _entity, GameTime _gameTime){
-            CheckForActiveInput();
-            ControlInput(_entity);
-            SetDirection(_physicBody, ref _controller);
+            //CheckForActiveInput();
+            //ControlInput(_entity);
+            //SetDirection(_physicBody, ref _controller);
             UpdateListeners(_gameTime);
         }
 

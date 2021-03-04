@@ -21,10 +21,11 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in Controller _controller){
-            var lookDir = _controller.Direction;
-            if(lookDir != Vector2.Zero)
-                _physicBody.SetRotation((float)Math.Atan2(lookDir.Y, lookDir.X));
+        private void Update(ref PhysicBody _physicBody, in Controller _controller, in RotatePlayer _rotatePlayer){
+            // var lookDir = _controller.Direction;
+            // if(lookDir != Vector2.Zero)
+            //     _physicBody.SetRotation((float)Math.Atan2(lookDir.Y, lookDir.X));
+            _physicBody.SetRotation((float)Math.Atan2(_rotatePlayer.Direction.Y, _rotatePlayer.Direction.X));
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using MonoGame.Extended;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
@@ -40,12 +41,12 @@ namespace Gabiac.Scripts.ECS.Systems
 
         [Update]
         private void Update(in PhysicBody _physicBody, in Controller _controller, in Trail _trail, GameTime _gameTime){
-            var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
+            var elapsedTime = (decimal)_gameTime.ElapsedGameTime.TotalSeconds;
             var position = ConvertUnits.ToDisplayUnits(_physicBody.Body.Position);
             var velocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
             spriteBatch.DrawString(font, 
                                         
-                                        "FPS: " + 1/(elapsedTime/100) +
+                                        "FPS: " +  Math.Round(1/(elapsedTime)) +
                                         "\n" +
                                         "Velocity: " + velocity.ToString() +
                                         "\n" +

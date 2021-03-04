@@ -3,11 +3,11 @@ using MonoGame.Extended.Input.InputListeners;
 
 namespace Gabiac.Scripts.ECS.Components.Input
 {
-    public struct GamepadEvent:InputEvent
+    public struct GamepadDownEvent:InputEvent
     {
         public EventArgs EventArgs { get; set; }
 
-        public GamepadEvent(GamePadEventArgs _eventArgs){
+        public GamepadDownEvent(GamePadEventArgs _eventArgs){
             EventArgs = _eventArgs;
         }
     }

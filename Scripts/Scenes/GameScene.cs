@@ -15,14 +15,14 @@ namespace Gabiac.Scripts.Scenes
             var texture = Texture2D.FromFile(GabiacSettings.graphics.GraphicsDevice, "Content/Car.png");
             var physicWorld = GabiacSettings.physicWorld;
 
-            player.Set(new Controller(Vector2.Zero, 5, false));
+            player.Set(new Controller(Vector2.UnitX, 5, false));
             var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), texture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic);
             player.Set(physicBody);
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
             player.Set(new InputHandler());
             player.Set(new RocketFire());
-            player.Set(new RotatePlayer());
+            player.Set(new RotatePlayer(Vector2.UnitX));
             player.Set(new Trail(10, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
             
             var player1 = GabiacSettings.world.CreateEntity();
@@ -54,8 +54,8 @@ namespace Gabiac.Scripts.Scenes
             var physicWorld = GabiacSettings.physicWorld;
 
             UpdateSystems = new SequentialSystem<GameTime>(
-                new InputSystem(world),
-                new TestSystem(world),
+                new InputEventWritingSystem(world),
+                new InputEventReadingSystem(world),
                 new RotationByControllerSystem(world, mainRunner),
                 new TranslationByControllerSystem(world, mainRunner),
                 new PhysicWorldUpdatingSystem(world, mainRunner, physicWorld),
