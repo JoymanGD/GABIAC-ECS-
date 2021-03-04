@@ -41,7 +41,10 @@ namespace Gabiac.Scripts.ECS.Systems
 
         void SetEvents(){
             mouseListener.MouseDown += (sender, args)=>{
-                world.Publish(new MouseDownEvent(MouseButton.Left));
+                world.Publish((InputEvent)new MouseDownEvent(args));
+            };
+            mouseListener.MouseUp += (sender, args)=>{
+                world.Publish((InputEvent)new MouseUpEvent(args));
             };
         }
 
@@ -58,7 +61,7 @@ namespace Gabiac.Scripts.ECS.Systems
             ControlInput(_entity);
             SetDirection(_physicBody, ref _controller);
             UpdateListeners(_gameTime);
-        }   
+        }
 
         void SetDirection(PhysicBody _physicBody, ref Controller _controller)
         {

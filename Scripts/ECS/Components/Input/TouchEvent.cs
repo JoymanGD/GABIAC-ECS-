@@ -1,17 +1,14 @@
-using MonoGame.Extended.Input;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using System;
+using MonoGame.Extended.Input.InputListeners;
 
 namespace Gabiac.Scripts.ECS.Components.Input
 {
     public struct TouchEvent:InputEvent
     {
-        public TouchLocation Location { get; set; }
+        public EventArgs EventArgs { get; set; }
 
-        public TouchEvent(TouchLocation _location){
-            Location = _location;
+        public TouchEvent(GamePadEventArgs _eventArgs){
+            EventArgs = _eventArgs;
         }
     }
 }

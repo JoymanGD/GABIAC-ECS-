@@ -3,11 +3,11 @@ using MonoGame.Extended.Input.InputListeners;
 
 namespace Gabiac.Scripts.ECS.Components.Input
 {
-    public struct MouseDownEvent:InputEvent
+    public struct KeyboardDownEvent:InputEvent
     {
         public EventArgs EventArgs { get; set; }
 
-        public MouseDownEvent(MouseEventArgs _eventArgs){
+        public KeyboardDownEvent(KeyboardEventArgs _eventArgs){
             EventArgs = _eventArgs;
         }
     }
