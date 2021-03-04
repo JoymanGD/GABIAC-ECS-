@@ -4,8 +4,7 @@ using DefaultEcs;
 using DefaultEcs.System;
 using Gabiac.Scripts.ECS.Components.Input;
 using MonoGame.Extended.Input;
-using MonoGame.Extended.Input.InputListeners;=
-
+using MonoGame.Extended.Input.InputListeners;
 namespace Gabiac.Scripts.ECS.Systems
 {
     public sealed class TestSystem : ISystem<GameTime>
