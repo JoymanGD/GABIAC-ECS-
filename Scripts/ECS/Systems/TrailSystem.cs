@@ -12,7 +12,6 @@ using MonoGame.Extended;
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Trail))]
-    [With(typeof(Transform))]
     [With(typeof(Controller))]
     [With(typeof(PhysicBody))]
     [With(typeof(DoTheTrail))]
@@ -33,7 +32,7 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(GameTime _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(in Transform _transform, ref Trail _trail, in Controller _controller, in PhysicBody _physicBody){
+        private void Update(ref Trail _trail, in Controller _controller, in PhysicBody _physicBody){
             //logic
             if(_trail.TrailPoints.Count == 0)
                 AddTrailPointNew(_trail, _physicBody, _controller);

@@ -91,3 +91,38 @@
  rewrite obj/Debug/netcoreapp3.1/Toil.assets.cache (95%)
  rewrite obj/Debug/netcoreapp3.1/Toil.csprojAssemblyReference.cache (73%)
  
+[DefaultECS cdb09d7] Scheduled commit 03.03.2021 19:00:00,93
+ 29 files changed, 158 insertions(+), 48 deletions(-)
+ create mode 100644 Scripts/ECS/Components/Input/InputEvent.cs
+ create mode 100644 Scripts/ECS/Systems/InputHandlerUpdatingSystem.cs
+ create mode 100644 gitsheduledpull.bat
+ 
+Updating cdb09d7..5e36bd6
+Fast-forward
+ Content/obj/DesktopGL/Content/.mgcontent           |   2 +-
+ Content/obj/DesktopGL/Content/.mgstats             |   1 +
+ Content/obj/DesktopGL/Content/Car.mgcontent        |   8 ++--
+ Scripts/ECS/Systems/InputEventSystem.cs            |  27 -----------
+ Scripts/ECS/Systems/InputHandlerCreatingSystem.cs  |  51 ---------------------
+ Scripts/ECS/Systems/InputHandlerUpdatingSystem.cs  |  25 ----------
+ Scripts/Scenes/GameScene.cs                        |   5 +-
+ bin/Debug/netcoreapp3.1/Toil.dll                   | Bin 605184 -> 605184 bytes
+ bin/Debug/netcoreapp3.1/Toil.pdb                   | Bin 40424 -> 40240 bytes
+ .../netcoreapp3.1/Toil.runtimeconfig.dev.json      |   6 ++-
+ obj/Debug/netcoreapp3.1/Toil.assets.cache          | Bin 8475 -> 8407 bytes
+ .../Toil.csproj.CoreCompileInputs.cache            |   2 +-
+ .../Toil.csprojAssemblyReference.cache             | Bin 119999 -> 119999 bytes
+ obj/Debug/netcoreapp3.1/Toil.dll                   | Bin 605184 -> 605184 bytes
+ .../netcoreapp3.1/Toil.genruntimeconfig.cache      |   2 +-
+ obj/Debug/netcoreapp3.1/Toil.pdb                   | Bin 40424 -> 40240 bytes
+ obj/Toil.csproj.nuget.dgspec.json                  |  25 ++++++----
+ obj/Toil.csproj.nuget.g.props                      |   6 +--
+ obj/project.assets.json                            |  25 ++++++----
+ obj/project.nuget.cache                            |  40 ++++++++--------
+ 20 files changed, 67 insertions(+), 158 deletions(-)
+ delete mode 100644 Scripts/ECS/Systems/InputEventSystem.cs
+ delete mode 100644 Scripts/ECS/Systems/InputHandlerCreatingSystem.cs
+ delete mode 100644 Scripts/ECS/Systems/InputHandlerUpdatingSystem.cs
+ 
+Already up to date.
+ 

@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Components.Input
 {
-    public struct MouseEvent:InputEvent
+    public struct MouseDownEvent:InputEvent
     {
         public MouseButton Button { get; set; }
 
-        public MouseEvent(MouseButton _button){
+        public MouseDownEvent(MouseButton _button){
             Button = _button;
         }
     }

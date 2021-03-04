@@ -10,12 +10,12 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
     [With(typeof(MovePlayer))]
-    public partial class MovementSystem : AEntitySetSystem<GameTime>
+    public partial class TranslationByControllerSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
         private World world;
         
-        public MovementSystem(World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
+        public TranslationByControllerSystem(World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
             world = _world;
             runner = _runner;
         }

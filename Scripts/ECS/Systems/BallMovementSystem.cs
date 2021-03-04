@@ -10,11 +10,11 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(Ball))]
     [With(typeof(PhysicBody))]
     
-    public partial class BallSystem : AEntitySetSystem<GameTime>
+    public partial class BallMovementSystem : AEntitySetSystem<GameTime>
     {
         private World world;
         
-        public BallSystem(World _world) : base(_world){
+        public BallMovementSystem(World _world) : base(_world){
             world = _world;
         }
 

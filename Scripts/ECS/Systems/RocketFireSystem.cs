@@ -10,6 +10,7 @@ using MonoGame.Extended.Particles.Modifiers.Interpolators;
 using MonoGame.Extended.Particles.Profiles;
 using MonoGame.Extended.TextureAtlases;
 using Microsoft.Xna.Framework.Graphics;
+using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System;
@@ -67,16 +68,19 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(GameTime _state) => spriteBatch.Begin(blendState: BlendState.AlphaBlend);
 
         [Update]
-        private void Update(in Renderer _renderer, in Transform _transform, GameTime _gameTime){
+        private void Update(in Renderer _renderer, in PhysicBody _physicBody, GameTime _gameTime){
             var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
+            var position = ConvertUnits.ToDisplayUnits(_physicBody.Body.Position);
+            var rotation = ConvertUnits.ToDisplayUnits(_physicBody.Body.Rotation);
             particleEffect.Update(elapsedTime/100);
             foreach(var emit in particleEffect.Emitters){
-                var tak = (int)_transform.DeltaPosition;
-                emit.Parameters.Opacity = tak*10;
+                var velocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
+                var velocityLength = (int)velocity.Length();
+                emit.Parameters.Opacity = velocityLength;//*10;
             }
-            Vector2 offset = new Vector2(_renderer.Image.Width * _transform.Scale.X / 2, 0);
-            var origin = _transform.Position - offset;
-            particleEffect.Position = Rotate(_transform.Rotation, origin, _transform.Position);
+            Vector2 offset = new Vector2(_renderer.Image.Width / 2, 0);
+            var origin = position - offset;
+            particleEffect.Position = Rotate(rotation, origin, position);
             spriteBatch.Draw(particleEffect);
         }
 

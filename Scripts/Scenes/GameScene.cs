@@ -15,7 +15,6 @@ namespace Gabiac.Scripts.Scenes
             var texture = Texture2D.FromFile(GabiacSettings.graphics.GraphicsDevice, "Content/Car.png");
             var physicWorld = GabiacSettings.physicWorld;
 
-            player.Set(new Transform(0));
             player.Set(new Controller(Vector2.Zero, 5, false));
             var physicBody = new PhysicBody(physicWorld, new Vector2(200,200), texture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic);
             player.Set(physicBody);
@@ -27,14 +26,11 @@ namespace Gabiac.Scripts.Scenes
             player.Set(new Trail(10, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
             
             var player1 = GabiacSettings.world.CreateEntity();
-            player1.Set(new Transform(0));
             player1.Set(new PhysicBody(physicWorld, new Vector2(400,400), texture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic));
             player1.Set(new Renderer(texture, Color.Red));
 
             var ball = GabiacSettings.world.CreateEntity();
             var ballTexture = Texture2D.FromFile(GabiacSettings.graphics.GraphicsDevice, "Content/Ball.png");
-            var ballTransform = new Transform(0);
-            ball.Set(ballTransform);
             ball.Set(new Renderer(ballTexture, Color.White));
             var ballBody = new PhysicBody(physicWorld, new Vector2(700,700), ballTexture.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic, _mass:.0001f);
             var ballComp = new Ball(Vector2.Zero, .02f);
@@ -59,16 +55,17 @@ namespace Gabiac.Scripts.Scenes
 
             UpdateSystems = new SequentialSystem<GameTime>(
                 new InputSystem(world),
-                new RotationSystem(world, mainRunner),
-                new MovementSystem(world, mainRunner),
-                new PhysicsSystem(world, mainRunner, physicWorld),
-                new BallSystem(world),
+                new TestSystem(world),
+                new RotationByControllerSystem(world, mainRunner),
+                new TranslationByControllerSystem(world, mainRunner),
+                new PhysicWorldUpdatingSystem(world, mainRunner, physicWorld),
+                new BallMovementSystem(world),
                 new BallReflectionSystem(world)
             );
 
             DrawSystems = new SequentialSystem<GameTime>(
                 new RocketFireSystem(world, spriteBatch, mainRunner),
-                new RenderSystem(spriteBatch, world, mainRunner),
+                new RenderingSystem(spriteBatch, world, mainRunner),
                 new DebugSystem(graphics, spriteBatch, world, physicWorld, mainRunner),
                 new TrailSystem(spriteBatch, world, mainRunner, physicWorld)
             );

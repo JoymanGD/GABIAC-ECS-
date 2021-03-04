@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
-    [With(typeof(Transform))]
     [With(typeof(Player))]
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
@@ -40,29 +39,21 @@ namespace Gabiac.Scripts.ECS.Systems
         protected override void PreUpdate(GameTime _state) => spriteBatch.Begin();
 
         [Update]
-        private void Update(in Transform _transform, in PhysicBody _physicBody, in Controller _controller, in Trail _trail, GameTime _gameTime){
+        private void Update(in PhysicBody _physicBody, in Controller _controller, in Trail _trail, GameTime _gameTime){
             var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
-            var linearVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
-            var angularVelocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.AngularVelocity);
+            var position = ConvertUnits.ToDisplayUnits(_physicBody.Body.Position);
+            var velocity = ConvertUnits.ToDisplayUnits(_physicBody.Body.LinearVelocity);
             spriteBatch.DrawString(font, 
                                         
-                                        "FPS: " + 1/(elapsedTime/100) + 
+                                        "FPS: " + 1/(elapsedTime/100) +
                                         "\n" +
-                                        "Velocity: " + _transform.DeltaPosition.ToString() + 
+                                        "Velocity: " + velocity.ToString() +
                                         "\n" +
-                                        "Position: " + _transform.Position.ToString() + 
-                                        "\n" +
-                                        "Angular velocity: " + angularVelocity + 
-                                        "\n" +
-                                        "Linear velocity: " + linearVelocity + 
-                                        "\n" +
-                                        "Inertia: " + ConvertUnits.ToDisplayUnits(_physicBody.Body.Inertia) + 
+                                        "Position: " + position.ToString() +
                                         "\n" +
                                         "MousePos: " + Mouse.GetState().Position.ToString()
 
             , new Vector2(40, 40), Color.White);
-
-            linearVelocity.Normalize();
             
             //trail points
             foreach (var trailPoint in _trail.TrailPoints)
@@ -75,10 +66,10 @@ namespace Gabiac.Scripts.ECS.Systems
             {
                 spriteBatch.DrawLine(ConvertUnits.ToDisplayUnits(j.BodyA.Position), ConvertUnits.ToDisplayUnits(j.BodyB.Position), Color.Yellow, 1);
             }
-            
+
             //directions
-            spriteBatch.DrawLine(_transform.Position, _transform.Position + linearVelocity * 80, Color.Red, 2); //physic force
-            spriteBatch.DrawLine(_transform.Position, _transform.Position + _controller.Direction * 80, Color.Green, 2); //mouse direction
+            spriteBatch.DrawLine(position, position + velocity.NormalizedCopy() * 80, Color.Red, 2); //physic force
+            spriteBatch.DrawLine(position, position + _controller.Direction * 80, Color.Green, 2); //mouse direction
         }
 
         protected override void PostUpdate(GameTime _state) => world.Optimize(runner, spriteBatch.End);

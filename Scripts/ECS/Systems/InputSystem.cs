@@ -1,3 +1,4 @@
+using Gabiac.Scripts.ECS.Components.Input;
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -20,18 +21,44 @@ namespace Gabiac.Scripts.ECS.Systems
         MouseStateExtended mouseState;
         KeyboardStateExtended keyboardState;
         TouchCollection touchState;
-        int test = 0;
+        MouseListener mouseListener;
+        KeyboardListener keyboardListener;
+        GamePadListener gamePadListener;
+        TouchListener touchListener;
 
         public InputSystem(World _world) : base(_world){
             world = _world;
+            SetListeners();
+            SetEvents();
+        }
+
+        void SetListeners(){
+            mouseListener = new MouseListener();
+            keyboardListener = new KeyboardListener();
+            touchListener = new TouchListener();
+            gamePadListener = new GamePadListener();
+        }
+
+        void SetEvents(){
+            mouseListener.MouseDown += (sender, args)=>{
+                world.Publish(new MouseDownEvent(MouseButton.Left));
+            };
+        }
+
+        void UpdateListeners(GameTime _gameTime){
+            mouseListener.Update(_gameTime);
+            keyboardListener.Update(_gameTime);
+            gamePadListener.Update(_gameTime);
+            touchListener.Update(_gameTime);
         }
 
         [Update]
-        protected void Update(ref Controller _controller, in PhysicBody _physicBody, in Entity _entity){
+        protected void Update(ref Controller _controller, in PhysicBody _physicBody, in Entity _entity, GameTime _gameTime){
             CheckForActiveInput();
             ControlInput(_entity);
             SetDirection(_physicBody, ref _controller);
-        }
+            UpdateListeners(_gameTime);
+        }   
 
         void SetDirection(PhysicBody _physicBody, ref Controller _controller)
         {
@@ -66,6 +93,7 @@ namespace Gabiac.Scripts.ECS.Systems
                 case Inputs.Mouse:
                     if(mouseState.WasButtonJustDown(MouseButton.Left)){
                         _entity.Set<MovePlayer>();
+                        //world.Publish(new MouseEvent(MouseButton.Left));
                     }
                     else if(mouseState.WasButtonJustUp(MouseButton.Left)){
                         _entity.Remove<MovePlayer>();
