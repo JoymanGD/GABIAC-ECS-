@@ -16,6 +16,7 @@ namespace Gabiac.Scripts.ECS.Systems
     [With(typeof(Player))]
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
+    [With(typeof(Debug))]
     public partial class DebugSystem : AEntitySetSystem<GameTime>
     {
         private SpriteBatch spriteBatch;

@@ -41,8 +41,6 @@ namespace Gabiac
 
         protected override void Draw(GameTime _gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-            
             SceneManager.Draw(_gameTime);
             
             base.Draw(_gameTime);

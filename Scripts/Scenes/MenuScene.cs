@@ -14,6 +14,7 @@ namespace Gabiac.Scripts.Scenes
     {
         Desktop desktop;
         public override void Draw(GameTime _gameTime){
+            GabiacSettings.graphicsDevice.Clear(Color.Black);
             desktop.Render();
         }
 

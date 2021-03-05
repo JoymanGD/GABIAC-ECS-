@@ -1,3 +1,4 @@
+using VelcroPhysics.Utilities;
 using DefaultEcs;
 using DefaultEcs.System;
 using DefaultEcs.Threading;
@@ -9,7 +10,6 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
-    //[With(typeof(RotatePlayer))]
     [With(typeof(MovePlayer))]
     public partial class TranslationByControllerSystem : AEntitySetSystem<GameTime>
     {
@@ -24,7 +24,6 @@ namespace Gabiac.Scripts.ECS.Systems
         [Update]
         private void Update(ref PhysicBody _physicBody, in RotatePlayer _rotatePlayer, in Controller _controller){
             _physicBody.Body.ApplyForce(_controller.Direction * _controller.Speed);
-            //_physicBody.Body.ApplyForce(_rotatePlayer.Direction);
         }
     }
 }

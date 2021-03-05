@@ -13,7 +13,7 @@ using Gabiac.Scripts.Helpers.Bindings;
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(Controller))]
-    [With(typeof(PhysicBody))]
+    [With(typeof(Transform))]
     public partial class InputEventWritingSystem : AEntitySetSystem<GameTime>
     {
         World world;
@@ -71,20 +71,20 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        protected void Update(ref Controller _controller, in PhysicBody _physicBody, in Entity _entity, GameTime _gameTime){
+        protected void Update(ref Controller _controller, in Transform _transform, in Entity _entity, GameTime _gameTime){
             CheckForActiveInput();
             ControlInput(_entity);
-            SetDirection(_physicBody, ref _controller);
+            SetDirection(_transform, ref _controller);
             //UpdateListeners(_gameTime);
         }
 
-        void SetDirection(PhysicBody _physicBody, ref Controller _controller)
+        void SetDirection(Transform _transform, ref Controller _controller)
         {
             switch (currentInput)
             {
                 case Inputs.Mouse:
                     Vector2 mousePos = mouseState.Position.ToVector2();
-                    var mouseDir = mousePos - _physicBody.Position();
+                    var mouseDir = mousePos - _transform.Position;
                     mouseDir.Normalize();
                     _controller.SetDirection(mouseDir);
                     break;
@@ -95,7 +95,7 @@ namespace Gabiac.Scripts.ECS.Systems
                     break;
                 case Inputs.Touch:
                     Vector2 touchPos = touchState[0].Position;
-                    var touchDir = touchPos - _physicBody.Position();
+                    var touchDir = touchPos - _transform.Position;
                     touchDir.Normalize();
                     _controller.SetDirection(touchDir);
                     break;

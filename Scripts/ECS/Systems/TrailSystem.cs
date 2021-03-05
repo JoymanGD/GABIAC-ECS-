@@ -43,10 +43,6 @@ namespace Gabiac.Scripts.ECS.Systems
                 AddTrailPointNew(_trail, _physicBody, _controller);
             }
 
-            // if(distanceToLast > _trail.PointsDistance * 4){
-            //     RemoveTrailPointNew(_trail);
-            // }
-
             if(_trail.TrailPoints.Count == _trail.MaxPointsCount){
                 RemoveTrailPointNew(_trail);
             }

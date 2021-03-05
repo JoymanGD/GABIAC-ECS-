@@ -7,10 +7,12 @@ namespace Gabiac.Scripts.ECS.Components
     {
         public Texture2D Image {get; private set;}
         public Color Color {get; private set;}
+        public int Layer {get; private set;}
 
-        public Renderer(Texture2D _image, Color _color){
+        public Renderer(Texture2D _image, Color _color, int _layer){
             Image = _image;
             Color = _color;
+            Layer = _layer;
         }
 
         public void SetImage(Texture2D _image){
