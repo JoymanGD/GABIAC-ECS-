@@ -20,9 +20,9 @@ namespace Gabiac.Scripts.Scenes
             player.Set(physicBody);
             player.Set(new Renderer(texture, Color.White));
             player.Set(new Player());
+            player.Set(new RotatePlayer());
             player.Set(new InputHandler());
             player.Set(new RocketFire());
-            player.Set(new RotatePlayer(Vector2.UnitX));
             player.Set(new Trail(10, 45, physicWorld, physicBody.Body, VelcroPhysics.Collision.Filtering.Category.None));
             
             var player1 = GabiacSettings.world.CreateEntity();

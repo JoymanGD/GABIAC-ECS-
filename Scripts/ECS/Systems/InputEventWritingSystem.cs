@@ -5,10 +5,10 @@ using Microsoft.Xna.Framework.Input;
 using DefaultEcs;
 using DefaultEcs.System;
 using Gabiac.Scripts.ECS.Components;
-using Gabiac.Scripts.ECS.Components.UI;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.Input.InputListeners;
 using Microsoft.Xna.Framework.Input.Touch;
+using Gabiac.Scripts.Helpers.Bindings;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
@@ -28,8 +28,8 @@ namespace Gabiac.Scripts.ECS.Systems
 
         public InputEventWritingSystem(World _world) : base(_world){
             world = _world;
-            SetListeners();
-            SetEvents();
+            //SetListeners();
+            //SetEvents();
         }
 
         void SetListeners(){
@@ -47,7 +47,7 @@ namespace Gabiac.Scripts.ECS.Systems
                 world.Publish(new MouseUpEvent(args));
             };
             mouseListener.MouseMoved += (sender, args) => {
-                Console.WriteLine("Mouse Moved");
+                world.Publish(new MouseMoveEvent(args));
             };
             keyboardListener.KeyPressed += (sender, args)=>{
                 world.Publish(new KeyboardDownEvent(args));
@@ -72,10 +72,10 @@ namespace Gabiac.Scripts.ECS.Systems
 
         [Update]
         protected void Update(ref Controller _controller, in PhysicBody _physicBody, in Entity _entity, GameTime _gameTime){
-            //CheckForActiveInput();
-            //ControlInput(_entity);
-            //SetDirection(_physicBody, ref _controller);
-            UpdateListeners(_gameTime);
+            CheckForActiveInput();
+            ControlInput(_entity);
+            SetDirection(_physicBody, ref _controller);
+            //UpdateListeners(_gameTime);
         }
 
         void SetDirection(PhysicBody _physicBody, ref Controller _controller)
@@ -109,27 +109,26 @@ namespace Gabiac.Scripts.ECS.Systems
             switch (currentInput)
             {
                 case Inputs.Mouse:
-                    if(mouseState.WasButtonJustDown(MouseButton.Left)){
+                    if(mouseState.WasButtonJustDown(MouseBinding.Move)){
                         _entity.Set<MovePlayer>();
-                        //world.Publish(new MouseEvent(MouseButton.Left));
                     }
-                    else if(mouseState.WasButtonJustUp(MouseButton.Left)){
+                    else if(mouseState.WasButtonJustUp(MouseBinding.Move)){
                         _entity.Remove<MovePlayer>();
                     }
 
-                    if(mouseState.WasButtonJustDown(MouseButton.Right)){
+                    if(mouseState.WasButtonJustDown(MouseBinding.DoTheTrail)){
                         _entity.Set<DoTheTrail>();
                     }
-                    else if(mouseState.WasButtonJustUp(MouseButton.Right)){
+                    else if(mouseState.WasButtonJustUp(MouseBinding.DoTheTrail)){
                         _entity.Remove<DoTheTrail>();
                     }
 
                     break;
                 case Inputs.Keyboard:
 
-                    bool movementKeysPressed = keyboardState.WasKeyJustUp(Keys.D) || keyboardState.WasKeyJustUp(Keys.S) || keyboardState.WasKeyJustUp(Keys.A) || keyboardState.WasKeyJustUp(Keys.W);
-                    bool movementKeysUnpressed = keyboardState.WasKeyJustDown(Keys.D) || keyboardState.WasKeyJustDown(Keys.S) || keyboardState.WasKeyJustDown(Keys.A) || keyboardState.WasKeyJustDown(Keys.W);
-                    bool movementKeysHold = keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.W);
+                    bool movementKeysPressed = keyboardState.WasKeyJustUp(KeyboardBinding.MoveRight) || keyboardState.WasKeyJustUp(KeyboardBinding.MoveDown) || keyboardState.WasKeyJustUp(KeyboardBinding.MoveLeft) || keyboardState.WasKeyJustUp(KeyboardBinding.MoveUp);
+                    bool movementKeysUnpressed = keyboardState.WasKeyJustUp(KeyboardBinding.MoveRight) || keyboardState.WasKeyJustUp(KeyboardBinding.MoveDown) || keyboardState.WasKeyJustUp(KeyboardBinding.MoveLeft) || keyboardState.WasKeyJustUp(KeyboardBinding.MoveUp);
+                    bool movementKeysHold = keyboardState.IsKeyDown(KeyboardBinding.MoveRight) || keyboardState.IsKeyDown(KeyboardBinding.MoveDown) || keyboardState.IsKeyDown(KeyboardBinding.MoveLeft) || keyboardState.IsKeyDown(KeyboardBinding.MoveUp);
 
                     if(movementKeysPressed){
                         _entity.Set<MovePlayer>();
@@ -138,10 +137,10 @@ namespace Gabiac.Scripts.ECS.Systems
                         _entity.Remove<MovePlayer>();
                     }
 
-                    if(keyboardState.WasKeyJustUp(Keys.LeftShift)){
+                    if(keyboardState.WasKeyJustUp(KeyboardBinding.DoTheTrail)){
                         _entity.Set<DoTheTrail>();
                     }
-                    else if(keyboardState.WasKeyJustDown(Keys.LeftShift)){
+                    else if(keyboardState.WasKeyJustDown(KeyboardBinding.DoTheTrail)){
                         _entity.Remove<DoTheTrail>();
                     }
                     break;
@@ -155,7 +154,7 @@ namespace Gabiac.Scripts.ECS.Systems
             keyboardState = KeyboardExtended.GetState();
             touchState = TouchPanel.GetState(); 
 
-            if(mouseState.PositionChanged || mouseState.WasButtonJustDown(MouseButton.Left) || mouseState.WasButtonJustDown(MouseButton.Right)){
+            if(mouseState.PositionChanged || mouseState.WasButtonJustDown(MouseBinding.Move) || mouseState.WasButtonJustDown(MouseBinding.DoTheTrail)){
                 if(currentInput!=Inputs.Mouse)
                     currentInput = Inputs.Mouse;
             }

@@ -1,3 +1,5 @@
+using System;
+using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using DefaultEcs;
 using DefaultEcs.System;
@@ -31,6 +33,21 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Subscribe]
+        private void EventReader(in MouseMoveEvent _inputEvent){
+            var eventArgs = (MouseEventArgs)_inputEvent.EventArgs;
+            if(eventArgs.Button == MouseBinding.Move){
+                var entities = world.GetEntities().With<Player>().AsEnumerable();
+                foreach (var entity in entities)
+                {
+                    var physicBody = entity.Get<PhysicBody>();
+                    var direction = eventArgs.Position.ToVector2() - ConvertUnits.ToDisplayUnits(physicBody.Body.Position);
+                    direction.Normalize();
+                    entity.Set(new RotatePlayer(direction));
+                }
+            }
+        }
+
+        [Subscribe]
         private void EventReader(in MouseUpEvent _inputEvent){
             var eventArgs = (MouseEventArgs)_inputEvent.EventArgs;
             if(eventArgs.Button == MouseBinding.Move){
@@ -50,7 +67,6 @@ namespace Gabiac.Scripts.ECS.Systems
                 foreach (var entity in entities)
                 {
                     entity.Set(new MovePlayer());
-                    var rotationComponent = entity.Get<RotatePlayer>();
                 }
             }
         }

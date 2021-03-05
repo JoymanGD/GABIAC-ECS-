@@ -8,6 +8,6 @@ namespace Gabiac.Scripts.Helpers.Bindings
         public static Keys MoveUp = Keys.W;
         public static Keys MoveDown = Keys.S;
         public static Keys MoveLeft = Keys.A;
-        public static Keys DoTheTrail;
+        public static Keys DoTheTrail = Keys.LeftShift;
     }
 }
