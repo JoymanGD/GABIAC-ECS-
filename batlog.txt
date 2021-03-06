@@ -145,3 +145,54 @@ Already up to date.
  
 Already up to date.
  
+[DefaultECS 4713395] Scheduled commit 05.03.2021 19:00:01,37
+ 25 files changed, 122 insertions(+), 108 deletions(-)
+ create mode 100644 Scripts/ECS/Components/Input/MouseMoveEvent.cs
+ rewrite bin/Debug/netcoreapp3.1/Toil.pdb (61%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.assets.cache (81%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.csprojAssemblyReference.cache (91%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.pdb (61%)
+ rewrite obj/project.nuget.cache (96%)
+ 
+Updating 4713395..e4ba067
+Fast-forward
+ Content/Ball2.png                                  | Bin 0 -> 6318 bytes
+ Content/Car2.png                                   | Bin 0 -> 16538 bytes
+ Content/SquaredPaper.png                           | Bin 0 -> 23416 bytes
+ Content/obj/DesktopGL/Content/.mgcontent           |   2 +-
+ Content/obj/DesktopGL/Content/Car.mgcontent        |   8 +--
+ Gabiac.cs                                          |   2 -
+ Scripts/ECS/Components/Debug.cs                    |  10 +++
+ Scripts/ECS/Components/Renderer.cs                 |   4 +-
+ Scripts/ECS/Components/Transform.cs                |  18 ++++++
+ Scripts/ECS/Systems/DebugSystem.cs                 |   1 +
+ Scripts/ECS/Systems/InputEventWritingSystem.cs     |  12 ++--
+ Scripts/ECS/Systems/PhysicWorldUpdatingSystem.cs   |   6 +-
+ Scripts/ECS/Systems/RenderingSystem.cs             |   6 +-
+ Scripts/ECS/Systems/TrailSystem.cs                 |   4 --
+ .../ECS/Systems/TranslationByControllerSystem.cs   |   3 +-
+ Scripts/Helpers/EntityBuilder.cs                   |  72 +++++++++++++++++++++
+ Scripts/Scenes/GameScene.cs                        |  57 ++++++++--------
+ Scripts/Scenes/IScene.cs                           |   4 +-
+ Scripts/Scenes/MenuScene.cs                        |   1 +
+ bin/Debug/netcoreapp3.1/Toil.dll                   | Bin 605696 -> 606720 bytes
+ bin/Debug/netcoreapp3.1/Toil.pdb                   | Bin 39024 -> 39732 bytes
+ .../netcoreapp3.1/Toil.runtimeconfig.dev.json      |   6 +-
+ obj/Debug/netcoreapp3.1/Toil.assets.cache          | Bin 8475 -> 8407 bytes
+ .../Toil.csproj.CoreCompileInputs.cache            |   2 +-
+ .../Toil.csprojAssemblyReference.cache             | Bin 119999 -> 119999 bytes
+ obj/Debug/netcoreapp3.1/Toil.dll                   | Bin 605696 -> 606720 bytes
+ .../netcoreapp3.1/Toil.genruntimeconfig.cache      |   2 +-
+ obj/Debug/netcoreapp3.1/Toil.pdb                   | Bin 39024 -> 39732 bytes
+ obj/Toil.csproj.nuget.dgspec.json                  |  25 ++++---
+ obj/Toil.csproj.nuget.g.props                      |   6 +-
+ obj/project.assets.json                            |  25 ++++---
+ obj/project.nuget.cache                            |  40 ++++++------
+ 32 files changed, 214 insertions(+), 102 deletions(-)
+ create mode 100644 Content/Ball2.png
+ create mode 100644 Content/Car2.png
+ create mode 100644 Content/SquaredPaper.png
+ create mode 100644 Scripts/ECS/Components/Debug.cs
+ create mode 100644 Scripts/ECS/Components/Transform.cs
+ create mode 100644 Scripts/Helpers/EntityBuilder.cs
+ 
