@@ -196,3 +196,8 @@ Fast-forward
  create mode 100644 Scripts/ECS/Components/Transform.cs
  create mode 100644 Scripts/Helpers/EntityBuilder.cs
  
+[DefaultECS 2f71e9f] Scheduled commit 06.03.2021 19:00:01,26
+ 1 file changed, 51 insertions(+)
+ 
+Already up to date.
+ 
