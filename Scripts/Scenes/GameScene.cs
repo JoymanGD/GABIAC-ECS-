@@ -51,8 +51,9 @@ namespace Gabiac.Scripts.Scenes
             var physicWorld = GabiacSettings.physicWorld;
 
             UpdateSystems = new SequentialSystem<GameTime>(
-                new InputEventWritingSystem(world),
-                new InputEventReadingSystem(world),
+                //new InputEventWritingSystem(world),
+                //new InputEventReadingSystem(world),
+                new InputSystem(world, mainRunner),
                 new RotationByControllerSystem(world, mainRunner),
                 new TranslationByControllerSystem(world, mainRunner),
                 new PhysicWorldUpdatingSystem(world, mainRunner, physicWorld),

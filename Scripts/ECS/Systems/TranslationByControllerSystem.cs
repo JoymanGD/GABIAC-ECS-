@@ -9,8 +9,7 @@ using Microsoft.Xna.Framework;
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(PhysicBody))]
-    [With(typeof(Controller))]
-    [With(typeof(MovePlayer))]
+    [With(typeof(MovementComponent))]
     public partial class TranslationByControllerSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
@@ -22,8 +21,9 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in RotatePlayer _rotatePlayer, in Controller _controller){
-            _physicBody.Body.ApplyForce(_controller.Direction * _controller.Speed);
+        private void Update(ref PhysicBody _physicBody, in MovementComponent _movementComponent){
+            var dir = _physicBody.RotationVector();
+            _physicBody.Body.ApplyForce(dir * ConvertUnits.ToSimUnits(_movementComponent.MovementSpeed));
         }
     }
 }

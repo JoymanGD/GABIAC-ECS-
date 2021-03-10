@@ -4,6 +4,7 @@ using VelcroPhysics.Shared.Optimization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Gabiac.Scripts.ECS.Components;
+using Gabiac.Scripts.ECS.Components.Input;
 using DefaultEcs;
 
 namespace Gabiac.Scripts.Helpers
@@ -24,8 +25,9 @@ namespace Gabiac.Scripts.Helpers
             newPlayer.Set(transform);
             newPlayer.Set(physicBody);
             newPlayer.Set(renderer);
+            newPlayer.Set(new InputComponent());
             newPlayer.Set(trail);
-            newPlayer.Set(new RotatePlayer());
+            newPlayer.Set(new RotationComponent(Vector2.Zero));
             newPlayer.Set(new Player());
             newPlayer.Set(controller);
             

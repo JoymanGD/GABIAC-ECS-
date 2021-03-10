@@ -9,7 +9,7 @@ namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(PhysicBody))]
     [With(typeof(Controller))]
-    [With(typeof(RotatePlayer))]
+    [With(typeof(RotationComponent))]
     public partial class RotationByControllerSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
@@ -21,11 +21,11 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in Controller _controller, in RotatePlayer _rotatePlayer){
-            var lookDir = _controller.Direction;
-            if(lookDir != Vector2.Zero)
-                _physicBody.SetRotation((float)Math.Atan2(lookDir.Y, lookDir.X));
-            //_physicBody.SetRotation((float)Math.Atan2(_rotatePlayer.Direction.Y, _rotatePlayer.Direction.X));
+        private void Update(ref PhysicBody _physicBody, in Controller _controller, in RotationComponent _rotationComponent){
+            // var lookDir = _controller.Direction;
+            // if(lookDir != Vector2.Zero)
+            //     _physicBody.SetRotation((float)Math.Atan2(lookDir.Y, lookDir.X));
+            _physicBody.SetRotation((float)Math.Atan2(_rotationComponent.Direction.Y, _rotationComponent.Direction.X));
         }
     }
 }

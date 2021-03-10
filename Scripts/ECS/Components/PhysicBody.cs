@@ -4,6 +4,7 @@ using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using VelcroPhysics.Factories;
 using VelcroPhysics.Collision.Filtering;
+using System;
 
 namespace Gabiac.Scripts.ECS.Components
 {
@@ -59,12 +60,21 @@ namespace Gabiac.Scripts.ECS.Components
             Body.Rotation = ConvertUnits.ToSimUnits(_rotation);
         }
 
-        public float Rotation(bool UnSim = true){
+        public float RotationFloat(bool UnSim = true){
             float _rotation;
             if(UnSim)
                 _rotation = ConvertUnits.ToDisplayUnits(Body.Rotation);
             else
                 _rotation = Body.Rotation;
+            return _rotation;
+        }
+
+        public Vector2 RotationVector(bool UnSim = true){
+            Vector2 _rotation = new Vector2((float)Math.Cos(Body.Rotation), (float)Math.Sin(Body.Rotation));
+            
+            if(UnSim)
+                _rotation = ConvertUnits.ToDisplayUnits(_rotation);
+
             return _rotation;
         }
     }
