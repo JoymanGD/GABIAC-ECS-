@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using DefaultEcs;
 using MonoGame.Extended.Input;
 using Gabiac.Scripts.Helpers.Bindings;
@@ -10,10 +11,10 @@ namespace Gabiac.Scripts.ECS.Systems.Input
         public void Update(Entity _entity){
             var mouseState = MouseExtended.GetState();
             if(mouseState.WasButtonJustDown(MouseBinding.Move)){
-                _entity.Set(new MovementComponent(4));
+                _entity.Set(new TranslationComponent(7));
             }
             else if(mouseState.WasButtonJustUp(MouseBinding.Move)){
-                _entity.Remove<MovementComponent>();
+                _entity.Remove<TranslationComponent>();
             }
 
             if(mouseState.WasButtonJustDown(MouseBinding.DoTheTrail)){
@@ -23,11 +24,13 @@ namespace Gabiac.Scripts.ECS.Systems.Input
                 _entity.Remove<DoTheTrail>();
             }
 
-            var rotationComponent = _entity.Get<RotationComponent>();
-            var transformComponent = _entity.Get<Transform>();
-            var direction = mouseState.Position.ToVector2() - transformComponent.Position;
-            direction.Normalize();
-            rotationComponent.Direction = direction;
+            if(_entity.Has<RotationComponent>() && _entity.Has<Transform>() && _entity.Has<TranslationComponent>()){
+                ref RotationComponent rotationComponent = ref _entity.Get<RotationComponent>();
+                ref Transform transform = ref _entity.Get<Transform>();
+                var direction = mouseState.Position.ToVector2() - transform.Position;
+                direction.Normalize();
+                rotationComponent.Direction = Vector2.Lerp(rotationComponent.Direction, direction, .02f);
+            }
         }
     }
 }

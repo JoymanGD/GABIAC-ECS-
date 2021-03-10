@@ -27,7 +27,7 @@ namespace Gabiac.Scripts.ECS.Systems
                 var entities = world.GetEntities().With<Player>().AsEnumerable();
                 foreach (var entity in entities)
                 {
-                    entity.Set(new MovementComponent());
+                    entity.Set(new TranslationComponent());
                 }
             }
         }
@@ -51,10 +51,10 @@ namespace Gabiac.Scripts.ECS.Systems
         private void EventReader(in MouseUpEvent _inputEvent){
             var eventArgs = (MouseEventArgs)_inputEvent.EventArgs;
             if(eventArgs.Button == MouseBinding.Move){
-                var entities = world.GetEntities().With<Player>().With<MovementComponent>().AsEnumerable();
+                var entities = world.GetEntities().With<Player>().With<TranslationComponent>().AsEnumerable();
                 foreach (var entity in entities)
                 {
-                    entity.Remove<MovementComponent>();
+                    entity.Remove<TranslationComponent>();
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace Gabiac.Scripts.ECS.Systems
                 var entities = world.GetEntities().With<Player>().AsEnumerable();
                 foreach (var entity in entities)
                 {
-                    entity.Set(new MovementComponent());
+                    entity.Set(new TranslationComponent());
                 }
             }
         }
@@ -75,10 +75,10 @@ namespace Gabiac.Scripts.ECS.Systems
         private void EventReader(in KeyboardUpEvent _inputEvent){
             var eventArgs = (KeyboardEventArgs)_inputEvent.EventArgs;
             if(eventArgs.Key == KeyboardBinding.MoveRight || eventArgs.Key == KeyboardBinding.MoveLeft || eventArgs.Key == KeyboardBinding.MoveUp || eventArgs.Key == KeyboardBinding.MoveDown){
-                var entities = world.GetEntities().With<Player>().With<MovementComponent>().AsEnumerable();
+                var entities = world.GetEntities().With<Player>().With<TranslationComponent>().AsEnumerable();
                 foreach (var entity in entities)
                 {
-                    entity.Remove<MovementComponent>();
+                    entity.Remove<TranslationComponent>();
                 }
             }
         }

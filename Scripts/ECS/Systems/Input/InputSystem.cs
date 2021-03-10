@@ -27,11 +27,11 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(in Entity _entity){
+        private void Update(in Entity _entity, in Transform _transform, ref RotationComponent _rotationComponent){
             foreach (var system in InputSystems)
             {
                 system.Update(_entity);
             }
         }
     }
-}
+} 

@@ -39,15 +39,7 @@ namespace Gabiac.Scripts.ECS.Components
                 Body.Mass = _mass;
         }
 
-        public void SetBody(Body _body){
-            Body = _body;
-        }
-
-        public void SetPosition(Vector2 _position){
-            Body.Position = ConvertUnits.ToSimUnits(_position);
-        }
-
-        public Vector2 Position(bool UnSim = true){
+        public Vector2 GetPosition(bool UnSim = true){
             Vector2 _position;
             if(UnSim)
                 _position = ConvertUnits.ToDisplayUnits(Body.Position);
@@ -58,24 +50,6 @@ namespace Gabiac.Scripts.ECS.Components
 
         public void SetRotation(float _rotation){
             Body.Rotation = ConvertUnits.ToSimUnits(_rotation);
-        }
-
-        public float RotationFloat(bool UnSim = true){
-            float _rotation;
-            if(UnSim)
-                _rotation = ConvertUnits.ToDisplayUnits(Body.Rotation);
-            else
-                _rotation = Body.Rotation;
-            return _rotation;
-        }
-
-        public Vector2 RotationVector(bool UnSim = true){
-            Vector2 _rotation = new Vector2((float)Math.Cos(Body.Rotation), (float)Math.Sin(Body.Rotation));
-            
-            if(UnSim)
-                _rotation = ConvertUnits.ToDisplayUnits(_rotation);
-
-            return _rotation;
         }
     }
 }

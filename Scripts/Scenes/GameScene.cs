@@ -54,8 +54,8 @@ namespace Gabiac.Scripts.Scenes
                 //new InputEventWritingSystem(world),
                 //new InputEventReadingSystem(world),
                 new InputSystem(world, mainRunner),
-                new RotationByControllerSystem(world, mainRunner),
-                new TranslationByControllerSystem(world, mainRunner),
+                new TranslationSystem(world, mainRunner),
+                new RotationSystem(world, mainRunner),
                 new PhysicWorldUpdatingSystem(world, mainRunner, physicWorld),
                 new BallMovementSystem(world),
                 new BallReflectionSystem(world)

@@ -55,7 +55,7 @@ namespace Gabiac.Scripts.ECS.Systems
                 var lastPoolNode = _pool.Last;
                 var lastBody = lastPoolNode.Value;
                 lastBody.Enabled = true;
-                lastBody.Position = _physicBody.Position(false);
+                lastBody.Position = _physicBody.GetPosition(false);
 
                 //pooling
                 _pool.RemoveLast();

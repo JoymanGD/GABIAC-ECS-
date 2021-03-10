@@ -110,10 +110,10 @@ namespace Gabiac.Scripts.ECS.Systems
             {
                 case Inputs.Mouse:
                     if(mouseState.WasButtonJustDown(MouseBinding.Move)){
-                        _entity.Set<MovementComponent>();
+                        _entity.Set<TranslationComponent>();
                     }
                     else if(mouseState.WasButtonJustUp(MouseBinding.Move)){
-                        _entity.Remove<MovementComponent>();
+                        _entity.Remove<TranslationComponent>();
                     }
 
                     if(mouseState.WasButtonJustDown(MouseBinding.DoTheTrail)){
@@ -131,10 +131,10 @@ namespace Gabiac.Scripts.ECS.Systems
                     bool movementKeysHold = keyboardState.IsKeyDown(KeyboardBinding.MoveRight) || keyboardState.IsKeyDown(KeyboardBinding.MoveDown) || keyboardState.IsKeyDown(KeyboardBinding.MoveLeft) || keyboardState.IsKeyDown(KeyboardBinding.MoveUp);
 
                     if(movementKeysPressed){
-                        _entity.Set<MovementComponent>();
+                        _entity.Set<TranslationComponent>();
                     }
                     else if(movementKeysUnpressed && !movementKeysHold){
-                        _entity.Remove<MovementComponent>();
+                        _entity.Remove<TranslationComponent>();
                     }
 
                     if(keyboardState.WasKeyJustUp(KeyboardBinding.DoTheTrail)){

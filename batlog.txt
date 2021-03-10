@@ -214,3 +214,14 @@ Already up to date.
  
 Already up to date.
  
+[DefaultECS 38b90f3] Scheduled commit 10.03.2021 19:00:01,88
+ 24 files changed, 166 insertions(+), 43 deletions(-)
+ create mode 100644 Scripts/ECS/Components/Input/InputComponent.cs
+ delete mode 100644 Scripts/ECS/Components/MovePlayer.cs
+ create mode 100644 Scripts/ECS/Components/MovementComponent.cs
+ rename Scripts/ECS/Components/{RotatePlayer.cs => RotationComponent.cs} (70%)
+ create mode 100644 Scripts/ECS/Systems/Input/IInputSystem.cs
+ create mode 100644 Scripts/ECS/Systems/Input/InputSystem.cs
+ create mode 100644 Scripts/ECS/Systems/Input/KeyboardInputSystem.cs
+ create mode 100644 Scripts/ECS/Systems/Input/MouseInputSystem.cs
+ 

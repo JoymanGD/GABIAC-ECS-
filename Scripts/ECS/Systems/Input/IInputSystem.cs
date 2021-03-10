@@ -1,4 +1,5 @@
 using DefaultEcs;
+using Gabiac.Scripts.ECS.Components;
 
 namespace Gabiac.Scripts.ECS.Systems.Input
 {

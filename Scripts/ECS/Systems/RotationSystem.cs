@@ -8,23 +8,20 @@ using System;
 namespace Gabiac.Scripts.ECS.Systems
 {
     [With(typeof(PhysicBody))]
-    [With(typeof(Controller))]
     [With(typeof(RotationComponent))]
-    public partial class RotationByControllerSystem : AEntitySetSystem<GameTime>
+    [With(typeof(TranslationComponent))]
+    public partial class RotationSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
         private World world;
         
-        public RotationByControllerSystem(World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
+        public RotationSystem(World _world, IParallelRunner _runner) : base(_world, CreateEntityContainer, null, 0){
             world = _world;
             runner = _runner;
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in Controller _controller, in RotationComponent _rotationComponent){
-            // var lookDir = _controller.Direction;
-            // if(lookDir != Vector2.Zero)
-            //     _physicBody.SetRotation((float)Math.Atan2(lookDir.Y, lookDir.X));
+        private void Update(ref PhysicBody _physicBody, in RotationComponent _rotationComponent){
             _physicBody.SetRotation((float)Math.Atan2(_rotationComponent.Direction.Y, _rotationComponent.Direction.X));
         }
     }
