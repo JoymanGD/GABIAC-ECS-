@@ -10,9 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
-    [With(typeof(InputComponent))]
-    [With(typeof(Transform))]
-    [With(typeof(RotationComponent))]
+    [With(typeof(InputComponent), typeof(Transform), typeof(RotationComponent))]
     public partial class InputSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;

@@ -17,7 +17,7 @@ namespace Gabiac.Scripts.ECS.Systems.Input
             bool movementKeysHold = keyboardState.IsKeyDown(KeyboardBinding.MoveRight) || keyboardState.IsKeyDown(KeyboardBinding.MoveDown) || keyboardState.IsKeyDown(KeyboardBinding.MoveLeft) || keyboardState.IsKeyDown(KeyboardBinding.MoveUp);
 
             if(movementKeysPressed){
-                _entity.Set(new TranslationComponent(7));
+                _entity.Set(new TranslationComponent(7, TranslationComponent.TranslationType.ApplyForce));
             }
             
             if(movementKeysUnpressed && !movementKeysHold){

@@ -12,7 +12,7 @@ namespace Gabiac.Scripts.ECS.Systems.Input
             var mouseState = MouseExtended.GetState();
             var isMoving = mouseState.IsButtonDown(MouseBinding.Move);
             if(mouseState.WasButtonJustDown(MouseBinding.Move)){
-                _entity.Set(new TranslationComponent(7));
+                _entity.Set(new TranslationComponent(7, TranslationComponent.TranslationType.ApplyForce));
             }
             else if(mouseState.WasButtonJustUp(MouseBinding.Move)){
                 _entity.Remove<TranslationComponent>();

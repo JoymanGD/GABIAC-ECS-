@@ -47,19 +47,15 @@ namespace Gabiac.Scripts.Helpers
             //Define components
             var renderer = new Renderer(_image, Color.White, 1);
             var transform = new Transform(_position, _scale, 0);
-            var physicBody = new PhysicBody(_physicWorld, _position, _image.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic, _mass:.0001f);
-            physicBody.Body.OnCollision += (fixtA, fixtB, contact)=>{
-                Vector2 norm;
-                FixedArray2<Vector2> points;
-                contact.GetWorldManifold(out norm, out points);
-                newBall.Set(new BallReflection(norm));
-            };
-            var ballComponent = new Ball(_startDirection, _startSpeed); //(Vector2.One, 0.02f)
+            var physicBody = new PhysicBody(_physicWorld, _position, _image.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic);
             
             //Set components
             newBall.Set(renderer);
+            newBall.Set(transform);
             newBall.Set(physicBody);
-            newBall.Set(ballComponent);
+            newBall.Set(new Ball());
+            newBall.Set(new TranslationComponent(3f, TranslationComponent.TranslationType.TranslatePosition));
+            newBall.Set(new RotationComponent(new Vector2(-1,-1)));
 
             return newBall;
         }

@@ -25,9 +25,10 @@ namespace Gabiac.Scripts.ECS.Systems
             var rotation = ConvertUnits.ToDisplayUnits(_physicBody.Body.Rotation);
             var direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
             direction.Normalize();
-            _physicBody.Body.ApplyForce(direction * _movementComponent.TranslationSpeed);
-            // var newPos = _physicBody.Body.Position + direction * ConvertUnits.ToSimUnits(_movementComponent.TranslationSpeed);
-            // _physicBody.Body.Position = newPos;
+            if(_movementComponent.CurrentType == TranslationComponent.TranslationType.ApplyForce)
+                _physicBody.Body.ApplyForce(direction * _movementComponent.TranslationSpeed);
+            else if(_movementComponent.CurrentType == TranslationComponent.TranslationType.TranslatePosition)
+                _physicBody.Body.Position += ConvertUnits.ToSimUnits(direction * _movementComponent.TranslationSpeed);
         }
     }
 }
