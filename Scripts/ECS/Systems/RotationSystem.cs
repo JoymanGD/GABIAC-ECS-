@@ -7,9 +7,9 @@ using System;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
-    [With(typeof(PhysicBody))]
+    [Without(typeof(PhysicBody))]
     [With(typeof(RotationComponent))]
-    [With(typeof(TranslationComponent))]
+    [With(typeof(Transform))]
     public partial class RotationSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
@@ -21,8 +21,8 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in RotationComponent _rotationComponent){
-            _physicBody.SetRotation((float)Math.Atan2(_rotationComponent.Direction.Y, _rotationComponent.Direction.X));
+        private void Update(ref Transform _transform, in RotationComponent _rotationComponent){
+            _transform.Rotation = (float)Math.Atan2(_rotationComponent.Direction.Y, _rotationComponent.Direction.X);
         }
     }
 }

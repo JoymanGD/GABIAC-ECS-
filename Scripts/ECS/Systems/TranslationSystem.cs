@@ -8,8 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
-    [With(typeof(PhysicBody))]
+    [Without(typeof(PhysicBody))]
     [With(typeof(TranslationComponent))]
+    [With(typeof(Transform))]
     public partial class TranslationSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
@@ -21,14 +22,11 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, in TranslationComponent _movementComponent){
-            var rotation = ConvertUnits.ToDisplayUnits(_physicBody.Body.Rotation);
-            var direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
+        private void Update(ref Transform _transform, in TranslationComponent _translationComponent){
+            var direction = new Vector2((float)Math.Cos(_transform.Rotation), (float)Math.Sin(_transform.Rotation));
             direction.Normalize();
-            //_physicBody.Body.ApplyForce(direction * _movementComponent.TranslationSpeed);
-            var newPos = _physicBody.Body.Position + direction * ConvertUnits.ToSimUnits(_movementComponent.TranslationSpeed);
-            //_physicBody.Body.Position = Vector2.Lerp(_physicBody.Body.Position, newPos, .5f);
-            _physicBody.Body.Position = newPos;
+
+            _transform.Position += direction * _translationComponent.TranslationSpeed;
         }
     }
 }

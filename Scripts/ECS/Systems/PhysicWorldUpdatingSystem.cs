@@ -8,28 +8,25 @@ using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
-    [With(typeof(PhysicBody))]
-    [With(typeof(Transform))]
-    public partial class PhysicWorldUpdatingSystem : AEntitySetSystem<GameTime>
+    [With(typeof(PhysicWorld))]
+    public class PhysicWorldUpdatingSystem : ISystem<GameTime>
     {
-        private IParallelRunner runner;
         private World world;
+        public bool IsEnabled { get; set; } = true;
         private VelcroPhysics.Dynamics.World physicWorld;
         const float stepRatio = 0.001f, fixedStepRatio = 1f / 30f;
         
-        public PhysicWorldUpdatingSystem(World _world, IParallelRunner _runner, VelcroPhysics.Dynamics.World _physicWorld) : base(_world, CreateEntityContainer, null, 0){
+        public PhysicWorldUpdatingSystem(World _world, VelcroPhysics.Dynamics.World _physicWorld){
             world = _world;
-            runner = _runner;
             physicWorld = _physicWorld;
         }
 
-        [Update]
-        private void Update(in PhysicBody _physicBody, ref Transform _transform, GameTime _gameTime){
+        public void Update(GameTime _gameTime){
             var elapsedTime = (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
             float step = Math.Min(elapsedTime * stepRatio, fixedStepRatio);
-            _transform.Position = ConvertUnits.ToDisplayUnits(_physicBody.Body.Position);
-            _transform.Rotation = ConvertUnits.ToDisplayUnits(_physicBody.Body.Rotation);
             physicWorld.Step(step);
         }
+
+        public void Dispose(){}
     }
 }

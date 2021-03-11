@@ -34,6 +34,13 @@ namespace Gabiac.Scripts.Helpers
             return newPlayer;
         }
 
+        public Entity BuildWorld(DefaultEcs.World _world){
+            var newWorld = _world.CreateEntity();
+            newWorld.Set(new PhysicWorld());
+            newWorld.Set(new Debug());
+            return newWorld;
+        }
+
         public Entity BuildBall(DefaultEcs.World _world, Texture2D _image, Vector2 _position, Vector2 _scale, float _startSpeed, Vector2 _startDirection, VelcroPhysics.Dynamics.World _physicWorld){
             var newBall = _world.CreateEntity();
 

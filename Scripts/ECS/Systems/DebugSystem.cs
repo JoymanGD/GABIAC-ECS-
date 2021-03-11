@@ -55,7 +55,7 @@ namespace Gabiac.Scripts.ECS.Systems
                                         "\n" +
                                         "MousePos: " + Mouse.GetState().Position.ToString()
 
-            , new Vector2(40, 40), Color.White);
+            , new Vector2(40, 40), Color.Black);
             
             //trail points
             foreach (var trailPoint in _trail.TrailPoints)

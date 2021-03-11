@@ -42,6 +42,8 @@ namespace Gabiac.Scripts.Scenes
                                                0.02f,
                                                Vector2.One,
                                                physicWorld);
+
+            var worldEntity = entityBuilder.BuildWorld(world);
         }
         public override void SetSystems(){
             var spriteBatch = GabiacSettings.spriteBatch;
@@ -51,12 +53,13 @@ namespace Gabiac.Scripts.Scenes
             var physicWorld = GabiacSettings.physicWorld;
 
             UpdateSystems = new SequentialSystem<GameTime>(
-                //new InputEventWritingSystem(world),
-                //new InputEventReadingSystem(world),
                 new InputSystem(world, mainRunner),
-                new TranslationSystem(world, mainRunner),
                 new RotationSystem(world, mainRunner),
-                new PhysicWorldUpdatingSystem(world, mainRunner, physicWorld),
+                new TranslationSystem(world, mainRunner),
+                new PhysicRotationSystem(world, mainRunner),
+                new PhysicTranslationSystem(world, mainRunner),
+                new PhysicWorldUpdatingSystem(world, physicWorld),
+                new TranformByPhysicBodyUpdatingSystem(world, mainRunner),
                 new BallMovementSystem(world),
                 new BallReflectionSystem(world)
             );

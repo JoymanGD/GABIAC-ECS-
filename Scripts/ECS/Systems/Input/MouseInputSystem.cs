@@ -10,6 +10,7 @@ namespace Gabiac.Scripts.ECS.Systems.Input
     {
         public void Update(Entity _entity){
             var mouseState = MouseExtended.GetState();
+            var isMoving = mouseState.IsButtonDown(MouseBinding.Move);
             if(mouseState.WasButtonJustDown(MouseBinding.Move)){
                 _entity.Set(new TranslationComponent(7));
             }
@@ -24,7 +25,7 @@ namespace Gabiac.Scripts.ECS.Systems.Input
                 _entity.Remove<DoTheTrail>();
             }
 
-            if(_entity.Has<RotationComponent>() && _entity.Has<Transform>() && _entity.Has<TranslationComponent>()){
+            if(_entity.Has<RotationComponent>() && _entity.Has<Transform>() && _entity.Has<TranslationComponent>() && isMoving){
                 ref RotationComponent rotationComponent = ref _entity.Get<RotationComponent>();
                 ref Transform transform = ref _entity.Get<Transform>();
                 var direction = mouseState.Position.ToVector2() - transform.Position;
