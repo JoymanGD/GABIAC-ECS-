@@ -52,6 +52,8 @@ namespace Gabiac.Scripts.Scenes
 
             UpdateSystems = new SequentialSystem<GameTime>(
                 new InputSystem(ecsWorld, mainRunner),
+                new RotationSystem(ecsWorld, mainRunner),
+                new TranslationSystem(ecsWorld, mainRunner),
                 new PhysicRotationSystem(ecsWorld, mainRunner),
                 new PhysicTranslationSystem(ecsWorld, mainRunner),
                 new PhysicWorldUpdatingSystem(ecsWorld, physicWorld),

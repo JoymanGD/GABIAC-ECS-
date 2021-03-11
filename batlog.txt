@@ -225,3 +225,11 @@ Already up to date.
  create mode 100644 Scripts/ECS/Systems/Input/KeyboardInputSystem.cs
  create mode 100644 Scripts/ECS/Systems/Input/MouseInputSystem.cs
  
+[DefaultECS dd408a0] Scheduled commit 11.03.2021 19:00:00,91
+ 18 files changed, 112 insertions(+), 158 deletions(-)
+ rewrite Scripts/ECS/Components/Ball.cs (80%)
+ delete mode 100644 Scripts/ECS/Components/BallReflection.cs
+ delete mode 100644 Scripts/ECS/Systems/BallReflectionSystem.cs
+ rewrite bin/Debug/netcoreapp3.1/Toil.pdb (70%)
+ rewrite obj/Debug/netcoreapp3.1/Toil.pdb (70%)
+ 

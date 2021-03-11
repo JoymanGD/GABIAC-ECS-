@@ -8,8 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Gabiac.Scripts.ECS.Systems
 {
-    [With(typeof(PhysicBody))]
-    [With(typeof(TranslationComponent))]
+    [With(typeof(PhysicBody), typeof(TranslationComponent))]
     public partial class PhysicTranslationSystem : AEntitySetSystem<GameTime>
     {
         private IParallelRunner runner;
