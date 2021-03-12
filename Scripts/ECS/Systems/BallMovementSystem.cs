@@ -17,7 +17,7 @@ namespace Gabiac.Scripts.ECS.Systems
         }
 
         [Update]
-        private void Update(ref PhysicBody _physicBody, ref RotationComponent _rotationComponent, in TranslationComponent _translationComponent){
+        private void Update(ref PhysicBody _physicBody, ref RotationComponent _rotationComponent){
         }
     }
 }

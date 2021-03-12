@@ -23,7 +23,7 @@ namespace Gabiac.Scripts.Helpers
 
             //Set components
             newPlayer.Set(transform);
-            //newPlayer.Set(physicBody);
+            newPlayer.Set(physicBody);
             newPlayer.Set(renderer);
             newPlayer.Set(new InputComponent());
             newPlayer.Set(trail);
@@ -49,12 +49,6 @@ namespace Gabiac.Scripts.Helpers
             var transform = new Transform(_position, _scale, 0);
             var rotationComponent = new RotationComponent(new Vector2(-1,-1));
             var physicBody = new PhysicBody(_physicWorld, _position, _image.Width/2, VelcroPhysics.Dynamics.BodyType.Dynamic);
-            physicBody.Body.OnCollision += (fixtA, fixtB, contact)=>{
-                Vector2 norm;
-                FixedArray2<Vector2> points;
-                contact.GetWorldManifold(out norm, out points);
-                rotationComponent.Direction = Vector2.Reflect(rotationComponent.Direction, norm);
-            };
             
             //Set components
             newBall.Set(renderer);

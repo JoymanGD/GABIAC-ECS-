@@ -4,6 +4,8 @@ using VelcroPhysics.Utilities;
 using Microsoft.Xna.Framework;
 using VelcroPhysics.Factories;
 using VelcroPhysics.Collision.Filtering;
+using VelcroPhysics.Shared.Optimization;
+using VelcroPhysics.Collision.ContactSystem;
 using System;
 
 namespace Gabiac.Scripts.ECS.Components
