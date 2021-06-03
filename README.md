@@ -1,6 +1,8 @@
 # gabiac
 Game about balls islands and cars
 
+Architecture: ECS
+
 TRELLO DESK: https://trello.com/b/VaQtRz8K/gabiac
 
 AWESOME MG: https://github.com/aloisdeniel/awesome-monogame#user-interfaces
